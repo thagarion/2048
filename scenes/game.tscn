@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://b25stsw7tbqv1"]
+
+[ext_resource type="Script" path="res://scenes/game.gd" id="1_xvv4q"]
+
+[node name="Game" type="Container"]
+script = ExtResource("1_xvv4q")
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
