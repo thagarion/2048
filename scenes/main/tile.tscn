@@ -1,0 +1,74 @@
+[gd_scene load_steps=8 format=3 uid="uid://dt57ogqeb0q7a"]
+
+[ext_resource type="Script" path="res://scenes/main/tile.gd" id="1_3ufkq"]
+[ext_resource type="Texture2D" uid="uid://bnfd1qus1q8y8" path="res://textures/background.png" id="2_ypmcq"]
+[ext_resource type="Texture2D" uid="uid://gx8c6ro3b8ry" path="res://textures/default/border.png" id="3_44jf1"]
+[ext_resource type="Texture2D" uid="uid://ttljsnnqry7j" path="res://textures/default/0.png" id="4_2gswy"]
+
+[sub_resource type="Animation" id="Animation_8v8p8"]
+resource_name = "add_tile"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(2.21914, 3.73213),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_nuk4n"]
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0.5, 0.5), Vector2(0.8, 0.8), Vector2(1.3, 1.3), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6xegn"]
+_data = {
+"RESET": SubResource("Animation_nuk4n"),
+"add_tile": SubResource("Animation_8v8p8")
+}
+
+[node name="Tile" type="MarginContainer"]
+custom_minimum_size = Vector2(128, 128)
+offset_right = 130.0
+offset_bottom = 130.0
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(64, 64)
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/margin_left = 1
+theme_override_constants/margin_top = 1
+theme_override_constants/margin_right = 1
+theme_override_constants/margin_bottom = 1
+script = ExtResource("1_3ufkq")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("2_ypmcq")
+
+[node name="Border" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("3_44jf1")
+
+[node name="Icon" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("4_2gswy")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_6xegn")
+}

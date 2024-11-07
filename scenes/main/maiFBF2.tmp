@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://d3ih2qk3pi8ou"]
+
+[ext_resource type="PackedScene" uid="uid://b25stsw7tbqv1" path="res://scenes/main/game.tscn" id="1_kbx01"]
+
+[node name="Main" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="VBoxContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Game" parent="CanvasLayer/MarginContainer/MarginContainer" instance=ExtResource("1_kbx01")]
+custom_minimum_size = Vector2(520, 520)
+layout_mode = 2

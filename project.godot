@@ -10,8 +10,8 @@ config_version=5
 
 [application]
 
-config/name="Git"
-run/main_scene="res://scenes/main.tscn"
+config/name="2048"
+run/main_scene="res://scenes/main/main.tscn"
 config/features=PackedStringArray("4.2", "Mobile")
 boot_splash/show_image=false
 boot_splash/fullsize=false
