@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://d3ih2qk3pi8ou"]
+[gd_scene load_steps=4 format=3 uid="uid://d3ih2qk3pi8ou"]
 
 [ext_resource type="Script" path="res://scenes/main/main.gd" id="1_iube1"]
 [ext_resource type="PackedScene" uid="uid://b25stsw7tbqv1" path="res://scenes/main/game.tscn" id="1_kbx01"]
+[ext_resource type="PackedScene" uid="uid://brw5qyf44k7ec" path="res://scenes/main/score/score.tscn" id="2_qer5e"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_iube1")
@@ -15,7 +16,18 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer"]
+[node name="ScoreMarginContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="Score" parent="CanvasLayer/MarginContainer/ScoreMarginContainer" instance=ExtResource("2_qer5e")]
+layout_mode = 2
+
+[node name="GameMarginContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 10
 theme_override_constants/margin_left = 10
@@ -23,8 +35,8 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="Game" parent="CanvasLayer/MarginContainer/MarginContainer" instance=ExtResource("1_kbx01")]
+[node name="Game" parent="CanvasLayer/MarginContainer/GameMarginContainer" instance=ExtResource("1_kbx01")]
 custom_minimum_size = Vector2(520, 520)
 layout_mode = 2
 
-[connection signal="score_signal" from="CanvasLayer/MarginContainer/MarginContainer/Game" to="." method="_on_game_score_signal"]
+[connection signal="score_signal" from="CanvasLayer/MarginContainer/GameMarginContainer/Game" to="CanvasLayer/MarginContainer/ScoreMarginContainer/Score" method="_on_game_score_signal"]

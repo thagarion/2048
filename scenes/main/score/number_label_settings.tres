@@ -1,0 +1,7 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://cyu0axqbyh5ol"]
+
+[ext_resource type="FontFile" uid="uid://brfgvos0vqx5v" path="res://fonts/Neocyr.ttf" id="1_87ad7"]
+
+[resource]
+font = ExtResource("1_87ad7")
+font_size = 30

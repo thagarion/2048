@@ -23,7 +23,6 @@ func _ready():
 		tiles.append([])
 		for j in range(field_size):
 			tiles[i].append(null)
-
 	var tiles_count = 0
 	while tiles_count < tiles_at_start:
 		var i = randi() % field_size
@@ -44,7 +43,7 @@ func _process(_delta):
 			move(Move.Down)
 	else:
 		wait_moving = is_tiles_moving()
-		if !wait_moving && create_tile:
+		if !wait_moving && should_create_tile:
 			create_random_tile()
 			should_create_tile = false
 
@@ -98,76 +97,88 @@ func move(direction: Move):
 		for x in range(field_size):
 			for y in range(1, field_size):
 				if tiles[x][y] != null:
-					move_up(x, y)
-					moved = true
+					moved = move_up(x, y)
 	elif direction == Move.Down:
 		for x in range(field_size):
 			for y in range(field_size - 2, -1, -1):
 				if tiles[x][y] != null:
-					move_down(x, y)
-					moved = true
+					moved = move_down(x, y)
 	elif direction == Move.Left:
 		for y in range(field_size):
 			for x in range(1, field_size):
 				if tiles[x][y] != null:
-					move_left(x, y)
-					moved = true
+					moved = move_left(x, y)
 	elif direction == Move.Right:
 		for y in range(field_size):
 			for x in range(field_size - 2, -1, -1):
 				if tiles[x][y] != null:
-					move_right(x, y)
-					moved = true
+					moved = move_right(x, y)
 	if moved:
 		should_create_tile = true
 
-func move_up(x : int, y : int):
+func move_up(x : int, y : int) -> bool:
+	var result = false
 	while y > 0 and tiles[x][y - 1] == null:
 		tiles[x][y].move(x, y - 1)
 		tiles[x][y - 1] = tiles[x][y]
 		tiles[x][y] = null
 		y -= 1
+		result = true
 	if y > 0 and tiles[x][y - 1].get_value() == tiles[x][y].get_value():
 		tiles[x][y].move(x, y - 1)
 		tiles[x][y].queue_free()
 		tiles[x][y - 1].level_up()
 		tiles[x][y] = null
+		result = true
+	return result
 
-func move_down(x : int, y : int):
+func move_down(x : int, y : int) -> bool:
+	var result = false
 	while y < field_size - 1 and tiles[x][y + 1] == null:
 		tiles[x][y].move(x, y + 1)
 		tiles[x][y + 1] = tiles[x][y]
 		tiles[x][y] = null
 		y += 1
+		result = true
 	if y > 0 and y < field_size - 1 and tiles[x][y + 1].get_value() == tiles[x][y].get_value():
 		tiles[x][y].move(x, y + 1)
 		tiles[x][y].queue_free()
 		tiles[x][y + 1].level_up()
 		tiles[x][y] = null
+		result = true
+	return result
 
-func move_right(x : int, y : int):
+func move_right(x : int, y : int) -> bool:
+	var result = false
 	while x < field_size - 1 and tiles[x + 1][y] == null:
 		tiles[x][y].move(x + 1, y)
 		tiles[x + 1][y] = tiles[x][y]
 		tiles[x][y] = null
 		x += 1
+		result = true
 	if x > 0 and x < field_size - 1 and tiles[x + 1][y].get_value() == tiles[x][y].get_value():
 		tiles[x][y].move(x + 1, y)
 		tiles[x][y].queue_free()
 		tiles[x + 1][y].level_up()
 		tiles[x][y] = null
+		result = true
+	return result
 
-func move_left(x : int, y : int):
+func move_left(x : int, y : int) -> bool:
+	var result = false
 	while x > 0 and tiles[x - 1][y] == null:
 		tiles[x][y].move(x - 1, y)
 		tiles[x - 1][y] = tiles[x][y]
 		tiles[x][y] = null
 		x -= 1
+		result = true
 	if x > 0 and tiles[x - 1][y].get_value() == tiles[x][y].get_value():
 		tiles[x][y].move(x - 1, y)
 		tiles[x][y].queue_free()
 		tiles[x - 1][y].level_up()
 		tiles[x][y] = null
+		result = true
+	return result
 
 func is_tiles_moving() -> bool:
 	for lines in tiles:
