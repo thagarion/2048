@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://d3ih2qk3pi8ou"]
 
-[ext_resource type="Script" path="res://scenes/main/main.gd" id="1_iube1"]
-[ext_resource type="PackedScene" uid="uid://b25stsw7tbqv1" path="res://scenes/main/game.tscn" id="1_kbx01"]
-[ext_resource type="PackedScene" uid="uid://brw5qyf44k7ec" path="res://scenes/main/score/score.tscn" id="2_qer5e"]
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_iube1"]
+[ext_resource type="PackedScene" uid="uid://b25stsw7tbqv1" path="res://scenes/game.tscn" id="1_kbx01"]
+[ext_resource type="PackedScene" uid="uid://brw5qyf44k7ec" path="res://scenes/score/score.tscn" id="2_qer5e"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_iube1")
@@ -10,11 +10,16 @@ script = ExtResource("1_iube1")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="MarginContainer" type="VBoxContainer" parent="CanvasLayer"]
-anchors_preset = 15
-anchor_right = 1.0
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
+offset_left = -270.0
+offset_top = -620.0
+offset_right = 270.0
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
 
 [node name="ScoreMarginContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer"]
 layout_mode = 2

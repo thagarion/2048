@@ -1,0 +1,45 @@
+[gd_scene load_steps=3 format=3 uid="uid://blyg22inh2gsf"]
+
+[ext_resource type="Theme" uid="uid://bhocm5mxg1djc" path="res://scenes/popups/style.tres" id="1_l56ki"]
+
+[sub_resource type="GDScript" id="GDScript_k60o3"]
+script/source = "extends Panel
+
+func show_popup(label: String, button: String):
+	$VBoxContainer/Label.text = label
+	$VBoxContainer/Button.text = button
+	show()
+"
+
+[node name="GameOver" type="Panel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_l56ki")
+script = SubResource("GDScript_k60o3")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Game Over"
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(400, 150)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Start"

@@ -1,9 +1,8 @@
 extends Container
 
 signal score_signal(value)
-signal game_over_sigmal
 
-var Tile = preload("res://scenes/main/tile.tscn")
+var Tile = preload("res://scenes/tile.tscn")
 
 var tiles = []
 const field_size = 4
@@ -13,6 +12,7 @@ enum Move {Up, Down, Left, Right}
 
 var should_create_tile = false
 var wait_moving = false
+var moving_disabled = false
 var swiping = false
 const swiping_length = 30
 var swiping_start_position: Vector2
@@ -23,32 +23,32 @@ func _ready():
 		tiles.append([])
 		for j in range(field_size):
 			tiles[i].append(null)
-	var tiles_count = 0
-	while tiles_count < tiles_at_start:
-		var i = randi() % field_size
-		var j = randi() % field_size
-		if tiles[i][j] == null:
-			create_tile(i, j)
-			tiles_count += 1
+	$GameOver.z_index = 1
+	$RestartGame.z_index = 1
+	start_game()
 
 func _process(_delta):
-	if !wait_moving:
-		if Input.is_action_just_pressed("move rigth"):
-			move(Move.Right)
-		if Input.is_action_just_pressed("move left"):
-			move(Move.Left)
-		if Input.is_action_just_pressed("move up"):
-			move(Move.Up)
-		if Input.is_action_just_pressed("move down"):
-			move(Move.Down)
-	else:
-		wait_moving = is_tiles_moving()
-		if !wait_moving && should_create_tile:
-			create_random_tile()
-			should_create_tile = false
+	if Input.is_action_just_pressed("restart"):
+		moving_disabled = true
+		$RestartGame.show()
+	if !moving_disabled:
+		if !wait_moving:
+			if Input.is_action_just_pressed("move rigth"):
+				move(Move.Right)
+			if Input.is_action_just_pressed("move left"):
+				move(Move.Left)
+			if Input.is_action_just_pressed("move up"):
+				move(Move.Up)
+			if Input.is_action_just_pressed("move down"):
+				move(Move.Down)
+		else:
+			wait_moving = is_tiles_moving()
+			if !wait_moving && should_create_tile:
+				create_random_tile()
+				should_create_tile = false
 
 func _on_gui_input(event):
-	if !wait_moving:
+	if !moving_disabled && !wait_moving:
 		if event is InputEventScreenTouch:
 			if event.is_pressed():
 				swiping_start_position = event.position
@@ -68,11 +68,18 @@ func _on_gui_input(event):
 						else:
 							move(Move.Up)
 
+func _on_button_pressed():
+	start_game()
+
 func create_tile(i: int, j: int):
 	var tile = Tile.instantiate()
 	tiles[i][j] = tile
-	add_child(tile)
+	$Tiles.add_child(tile)
 	tile.position = Vector2(i*tile.size.x, j*tile.size.y)
+
+func _on_no_button_pressed():
+	$RestartGame.hide()
+	moving_disabled = false
 
 func create_random_tile():
 	var available = []
@@ -86,9 +93,43 @@ func create_random_tile():
 	if available.size() > 0:
 		var index = randi() % available.size()
 		create_tile(available[index].x, available[index].y)
-	else:
-		game_over_sigmal.emit()
+	if available.size() == 1 && is_game_over():
+		$GameOver.show()
+		moving_disabled = true
 	score_signal.emit(score)
+
+func start_game():
+	$GameOver.hide()
+	$RestartGame.hide()
+	for i in range(field_size):
+		for j in range(field_size):
+			if tiles[i][j] != null:
+				tiles[i][j].queue_free()
+				tiles[i][j] = null
+	var tiles_count = 0
+	while tiles_count < tiles_at_start:
+		var i = randi() % field_size
+		var j = randi() % field_size
+		if tiles[i][j] == null:
+			create_tile(i, j)
+			tiles_count += 1
+	moving_disabled = false
+	score_signal.emit(0)
+
+func is_game_over() -> bool:
+	for i in range(field_size):
+		for j in range(field_size):
+			if tiles[i][j] == null:
+				return false
+			if i > 0 && tiles[i-1][j] != null && tiles[i][j].get_value() == tiles[i-1][j].get_value():
+				return false
+			if i < field_size - 1 && tiles[i + 1][j] != null && tiles[i][j].get_value() == tiles[i + 1][j].get_value():
+				return false
+			if j > 0 && tiles[i][j - 1] != null && tiles[i][j].get_value() == tiles[i][j - 1].get_value():
+				return false
+			if j < field_size - 1 && tiles[i][j + 1] != null && tiles[i][j].get_value() == tiles[i][j + 1].get_value():
+				return false
+	return true
 
 func move(direction: Move):
 	wait_moving = true
@@ -97,22 +138,26 @@ func move(direction: Move):
 		for x in range(field_size):
 			for y in range(1, field_size):
 				if tiles[x][y] != null:
-					moved = move_up(x, y)
+					if move_up(x, y):
+						moved = true
 	elif direction == Move.Down:
 		for x in range(field_size):
 			for y in range(field_size - 2, -1, -1):
 				if tiles[x][y] != null:
-					moved = move_down(x, y)
+					if move_down(x, y):
+						moved = true
 	elif direction == Move.Left:
 		for y in range(field_size):
 			for x in range(1, field_size):
 				if tiles[x][y] != null:
-					moved = move_left(x, y)
+					if move_left(x, y):
+						moved = true
 	elif direction == Move.Right:
 		for y in range(field_size):
 			for x in range(field_size - 2, -1, -1):
 				if tiles[x][y] != null:
-					moved = move_right(x, y)
+					if move_right(x, y):
+						moved = true
 	if moved:
 		should_create_tile = true
 

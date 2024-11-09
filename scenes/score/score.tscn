@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://brw5qyf44k7ec"]
 
-[ext_resource type="Script" path="res://scenes/main/score/score.gd" id="1_vka4g"]
-[ext_resource type="LabelSettings" uid="uid://dvhrfra0dkik3" path="res://scenes/main/score/label_settings.tres" id="2_x8m3q"]
-[ext_resource type="LabelSettings" uid="uid://cyu0axqbyh5ol" path="res://scenes/main/score/number_label_settings.tres" id="3_1pbcv"]
+[ext_resource type="Script" path="res://scenes/score/score.gd" id="1_vka4g"]
+[ext_resource type="LabelSettings" uid="uid://dvhrfra0dkik3" path="res://scenes/score/label_settings.tres" id="2_x8m3q"]
+[ext_resource type="LabelSettings" uid="uid://cyu0axqbyh5ol" path="res://scenes/score/number_label_settings.tres" id="3_1pbcv"]
 
 [node name="Score" type="HBoxContainer"]
 offset_right = 1.0
@@ -18,9 +18,9 @@ text = "Score:"
 label_settings = ExtResource("2_x8m3q")
 uppercase = true
 
-[node name="ScoreNUmber" type="Label" parent="."]
+[node name="ScoreNumber" type="Label" parent="."]
 layout_mode = 2
 size_flags_vertical = 8
-text = "0000
+text = "0
 "
 label_settings = ExtResource("3_1pbcv")
