@@ -44,4 +44,5 @@ theme_override_constants/margin_bottom = 10
 custom_minimum_size = Vector2(520, 520)
 layout_mode = 2
 
+[connection signal="chest_open" from="CanvasLayer/MarginContainer/ScoreMarginContainer/Score" to="CanvasLayer/MarginContainer/GameMarginContainer/Game" method="_on_score_chest_open"]
 [connection signal="score_signal" from="CanvasLayer/MarginContainer/GameMarginContainer/Game" to="CanvasLayer/MarginContainer/ScoreMarginContainer/Score" method="_on_game_score_signal"]

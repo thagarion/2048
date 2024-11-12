@@ -25,6 +25,7 @@ func _ready():
 			tiles[i].append(null)
 	$GameOver.z_index = 1
 	$RestartGame.z_index = 1
+	$OpenChest.z_index = 1
 	start_game()
 
 func _process(_delta):
@@ -80,6 +81,15 @@ func create_tile(i: int, j: int):
 func _on_no_button_pressed():
 	$RestartGame.hide()
 	moving_disabled = false
+
+func _on_score_chest_open():
+	moving_disabled = true
+	$OpenChest.show()
+
+func _on_open_chest_gui_input(event):
+	if event is InputEventScreenTouch:
+		$OpenChest.hide()
+		moving_disabled = false
 
 func create_random_tile():
 	var available = []
@@ -185,7 +195,7 @@ func move_down(x : int, y : int) -> bool:
 		tiles[x][y] = null
 		y += 1
 		result = true
-	if y > 0 and y < field_size - 1 and tiles[x][y + 1].get_value() == tiles[x][y].get_value():
+	if y >= 0 and y < field_size - 1 and tiles[x][y + 1].get_value() == tiles[x][y].get_value():
 		tiles[x][y].move(x, y + 1)
 		tiles[x][y].queue_free()
 		tiles[x][y + 1].level_up()
@@ -201,7 +211,7 @@ func move_right(x : int, y : int) -> bool:
 		tiles[x][y] = null
 		x += 1
 		result = true
-	if x > 0 and x < field_size - 1 and tiles[x + 1][y].get_value() == tiles[x][y].get_value():
+	if x >= 0 and x < field_size - 1 and tiles[x + 1][y].get_value() == tiles[x][y].get_value():
 		tiles[x][y].move(x + 1, y)
 		tiles[x][y].queue_free()
 		tiles[x + 1][y].level_up()
