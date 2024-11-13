@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://dt57ogqeb0q7a"]
 
-[ext_resource type="Script" path="res://scenes/tile.gd" id="1_c6uxj"]
-[ext_resource type="Texture2D" uid="uid://bnfd1qus1q8y8" path="res://textures/background.png" id="2_q0v0m"]
-[ext_resource type="Texture2D" uid="uid://gx8c6ro3b8ry" path="res://textures/default/border.png" id="3_udoop"]
-[ext_resource type="Texture2D" uid="uid://ttljsnnqry7j" path="res://textures/default/0.png" id="4_wmaxg"]
+[ext_resource type="Script" path="res://scenes/game/tile.gd" id="1_wxav5"]
+[ext_resource type="Texture2D" uid="uid://bnfd1qus1q8y8" path="res://textures/background.png" id="2_ka06h"]
+[ext_resource type="Texture2D" uid="uid://gx8c6ro3b8ry" path="res://textures/default/border.png" id="3_etqco"]
+[ext_resource type="Texture2D" uid="uid://ttljsnnqry7j" path="res://textures/default/0.png" id="4_ti3vu"]
 
 [sub_resource type="Animation" id="Animation_nuk4n"]
 length = 0.3
@@ -54,19 +54,19 @@ theme_override_constants/margin_left = 1
 theme_override_constants/margin_top = 1
 theme_override_constants/margin_right = 1
 theme_override_constants/margin_bottom = 1
-script = ExtResource("1_c6uxj")
+script = ExtResource("1_wxav5")
 
 [node name="Background" type="TextureRect" parent="."]
 layout_mode = 2
-texture = ExtResource("2_q0v0m")
+texture = ExtResource("2_ka06h")
 
 [node name="Border" type="TextureRect" parent="."]
 layout_mode = 2
-texture = ExtResource("3_udoop")
+texture = ExtResource("3_etqco")
 
 [node name="Icon" type="TextureRect" parent="."]
 layout_mode = 2
-texture = ExtResource("4_wmaxg")
+texture = ExtResource("4_ti3vu")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

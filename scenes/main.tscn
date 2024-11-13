@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://d3ih2qk3pi8ou"]
+[gd_scene load_steps=5 format=3 uid="uid://d3ih2qk3pi8ou"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_iube1"]
-[ext_resource type="PackedScene" uid="uid://b25stsw7tbqv1" path="res://scenes/game.tscn" id="1_kbx01"]
+[ext_resource type="PackedScene" uid="uid://b25stsw7tbqv1" path="res://scenes/game/game.tscn" id="1_kbx01"]
 [ext_resource type="PackedScene" uid="uid://brw5qyf44k7ec" path="res://scenes/score/score.tscn" id="2_qer5e"]
+[ext_resource type="PackedScene" uid="uid://dqndh6v0oonvw" path="res://scenes/skills/skills.tscn" id="4_78tsy"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_iube1")
@@ -43,6 +44,11 @@ theme_override_constants/margin_bottom = 10
 [node name="Game" parent="CanvasLayer/MarginContainer/GameMarginContainer" instance=ExtResource("1_kbx01")]
 custom_minimum_size = Vector2(520, 520)
 layout_mode = 2
+
+[node name="SkillButtons" parent="CanvasLayer/MarginContainer" instance=ExtResource("4_78tsy")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
 
 [connection signal="chest_open" from="CanvasLayer/MarginContainer/ScoreMarginContainer/Score" to="CanvasLayer/MarginContainer/GameMarginContainer/Game" method="_on_score_chest_open"]
 [connection signal="score_signal" from="CanvasLayer/MarginContainer/GameMarginContainer/Game" to="CanvasLayer/MarginContainer/ScoreMarginContainer/Score" method="_on_game_score_signal"]

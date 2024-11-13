@@ -2,7 +2,7 @@ extends Container
 
 signal score_signal(value)
 
-var Tile = preload("res://scenes/tile.tscn")
+var Tile = preload("res://scenes/game/tile.tscn")
 
 var tiles = []
 const field_size = 4

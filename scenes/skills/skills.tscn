@@ -1,0 +1,74 @@
+[gd_scene load_steps=8 format=3 uid="uid://dqndh6v0oonvw"]
+
+[ext_resource type="PackedScene" uid="uid://csgeoogjfhxe5" path="res://scenes/skills/skill_button.tscn" id="1_7mfhr"]
+[ext_resource type="Texture2D" uid="uid://bnfd1qus1q8y8" path="res://textures/background.png" id="2_hyhdc"]
+[ext_resource type="Texture2D" uid="uid://gx8c6ro3b8ry" path="res://textures/default/border.png" id="3_mcmwq"]
+[ext_resource type="Texture2D" uid="uid://bmbsgvjy33e1x" path="res://textures/undo.png" id="4_vljid"]
+[ext_resource type="Texture2D" uid="uid://cswnnfime5qxt" path="res://textures/remove.png" id="5_83aoy"]
+[ext_resource type="Texture2D" uid="uid://wyts51nke08t" path="res://textures/switch.png" id="6_iw18e"]
+[ext_resource type="Texture2D" uid="uid://p7dh7pjwv5vg" path="res://textures/restart.png" id="7_i007c"]
+
+[node name="SkillButtons" type="VBoxContainer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -132.0
+offset_right = 132.0
+offset_bottom = 128.0
+grow_horizontal = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="UndoSkillButton" parent="HBoxContainer" instance=ExtResource("1_7mfhr")]
+layout_mode = 2
+
+[node name="Background" parent="HBoxContainer/UndoSkillButton" index="0"]
+texture = ExtResource("2_hyhdc")
+
+[node name="Border" parent="HBoxContainer/UndoSkillButton" index="1"]
+texture = ExtResource("3_mcmwq")
+
+[node name="Icon" parent="HBoxContainer/UndoSkillButton" index="2"]
+texture = ExtResource("4_vljid")
+
+[node name="RemoveSkillButton" parent="HBoxContainer" instance=ExtResource("1_7mfhr")]
+layout_mode = 2
+
+[node name="Background" parent="HBoxContainer/RemoveSkillButton" index="0"]
+texture = ExtResource("2_hyhdc")
+
+[node name="Border" parent="HBoxContainer/RemoveSkillButton" index="1"]
+texture = ExtResource("3_mcmwq")
+
+[node name="Icon" parent="HBoxContainer/RemoveSkillButton" index="2"]
+texture = ExtResource("5_83aoy")
+
+[node name="SwitchSkillButton" parent="HBoxContainer" instance=ExtResource("1_7mfhr")]
+layout_mode = 2
+
+[node name="Background" parent="HBoxContainer/SwitchSkillButton" index="0"]
+texture = ExtResource("2_hyhdc")
+
+[node name="Border" parent="HBoxContainer/SwitchSkillButton" index="1"]
+texture = ExtResource("3_mcmwq")
+
+[node name="Icon" parent="HBoxContainer/SwitchSkillButton" index="2"]
+texture = ExtResource("6_iw18e")
+
+[node name="RestartSkillButton" parent="HBoxContainer" instance=ExtResource("1_7mfhr")]
+layout_mode = 2
+
+[node name="Background" parent="HBoxContainer/RestartSkillButton" index="0"]
+texture = ExtResource("2_hyhdc")
+
+[node name="Border" parent="HBoxContainer/RestartSkillButton" index="1"]
+texture = ExtResource("3_mcmwq")
+
+[node name="Icon" parent="HBoxContainer/RestartSkillButton" index="2"]
+texture = ExtResource("7_i007c")
+
+[editable path="HBoxContainer/UndoSkillButton"]
+[editable path="HBoxContainer/RemoveSkillButton"]
+[editable path="HBoxContainer/SwitchSkillButton"]
+[editable path="HBoxContainer/RestartSkillButton"]

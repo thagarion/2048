@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://csgeoogjfhxe5"]
+
+[node name="SkillButton" type="MarginContainer"]
+offset_right = 100.0
+offset_bottom = 100.0
+
+[node name="Background" type="TextureRect" parent="."]
+modulate = Color(0.817271, 0.565175, 0.438224, 1)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Border" type="TextureRect" parent="."]
+modulate = Color(0.458075, 0.0149153, 7.21961e-08, 1)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Icon" type="TextureRect" parent="."]
+layout_mode = 2
+mouse_filter = 2
