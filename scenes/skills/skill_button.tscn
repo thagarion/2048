@@ -1,19 +1,22 @@
-[gd_scene format=3 uid="uid://csgeoogjfhxe5"]
+[gd_scene load_steps=3 format=3 uid="uid://csgeoogjfhxe5"]
+
+[ext_resource type="Script" path="res://scenes/skills/skill_button.gd" id="1_1hqgn"]
+[ext_resource type="Texture2D" uid="uid://bmbsgvjy33e1x" path="res://textures/skills/undo.png" id="2_8v2t3"]
 
 [node name="SkillButton" type="MarginContainer"]
-offset_right = 100.0
-offset_bottom = 100.0
+offset_right = 96.0
+offset_bottom = 56.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_1hqgn")
 
-[node name="Background" type="TextureRect" parent="."]
-modulate = Color(0.817271, 0.565175, 0.438224, 1)
+[node name="Button" type="Button" parent="."]
 layout_mode = 2
-mouse_filter = 2
-
-[node name="Border" type="TextureRect" parent="."]
-modulate = Color(0.458075, 0.0149153, 7.21961e-08, 1)
-layout_mode = 2
-mouse_filter = 2
 
 [node name="Icon" type="TextureRect" parent="."]
+modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 mouse_filter = 2
+texture = ExtResource("2_8v2t3")
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

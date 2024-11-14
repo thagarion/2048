@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://ckcsmldlj0vex"]
 
 [ext_resource type="Theme" uid="uid://bhocm5mxg1djc" path="res://scenes/popups/style.tres" id="1_liqxc"]
-[ext_resource type="Texture2D" uid="uid://d0g7qa7ekue5x" path="res://textures/open-chest.png" id="2_g0jt2"]
+[ext_resource type="Texture2D" uid="uid://d0g7qa7ekue5x" path="res://textures/chest/open-chest.png" id="2_g0jt2"]
 
 [node name="OpenChest" type="Panel"]
 anchors_preset = 15

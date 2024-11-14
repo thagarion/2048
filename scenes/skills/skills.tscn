@@ -1,74 +1,48 @@
 [gd_scene load_steps=8 format=3 uid="uid://dqndh6v0oonvw"]
 
 [ext_resource type="PackedScene" uid="uid://csgeoogjfhxe5" path="res://scenes/skills/skill_button.tscn" id="1_7mfhr"]
-[ext_resource type="Texture2D" uid="uid://bnfd1qus1q8y8" path="res://textures/background.png" id="2_hyhdc"]
-[ext_resource type="Texture2D" uid="uid://gx8c6ro3b8ry" path="res://textures/default/border.png" id="3_mcmwq"]
-[ext_resource type="Texture2D" uid="uid://bmbsgvjy33e1x" path="res://textures/undo.png" id="4_vljid"]
-[ext_resource type="Texture2D" uid="uid://cswnnfime5qxt" path="res://textures/remove.png" id="5_83aoy"]
-[ext_resource type="Texture2D" uid="uid://wyts51nke08t" path="res://textures/switch.png" id="6_iw18e"]
-[ext_resource type="Texture2D" uid="uid://p7dh7pjwv5vg" path="res://textures/restart.png" id="7_i007c"]
+[ext_resource type="Theme" uid="uid://bi14pol6tu0ee" path="res://scenes/skills/style.tres" id="1_wwoyh"]
+[ext_resource type="Script" path="res://scenes/skills/skills.gd" id="2_j2g87"]
+[ext_resource type="Texture2D" uid="uid://bmbsgvjy33e1x" path="res://textures/skills/undo.png" id="2_s8bnj"]
+[ext_resource type="Texture2D" uid="uid://cswnnfime5qxt" path="res://textures/skills/remove.png" id="4_j4n1k"]
+[ext_resource type="Texture2D" uid="uid://wyts51nke08t" path="res://textures/skills/switch.png" id="5_fnr5j"]
+[ext_resource type="Texture2D" uid="uid://p7dh7pjwv5vg" path="res://textures/skills/restart.png" id="6_14lnm"]
 
 [node name="SkillButtons" type="VBoxContainer"]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -132.0
-offset_right = 132.0
-offset_bottom = 128.0
+offset_left = -198.0
+offset_right = 198.0
+offset_bottom = 56.0
 grow_horizontal = 2
+size_flags_horizontal = 6
+theme = ExtResource("1_wwoyh")
+script = ExtResource("2_j2g87")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
 
-[node name="UndoSkillButton" parent="HBoxContainer" instance=ExtResource("1_7mfhr")]
+[node name="UndoButton" parent="HBoxContainer" instance=ExtResource("1_7mfhr")]
 layout_mode = 2
+Icon = ExtResource("2_s8bnj")
+ButtonColor = 31.0
+Type = "Undo"
 
-[node name="Background" parent="HBoxContainer/UndoSkillButton" index="0"]
-texture = ExtResource("2_hyhdc")
-
-[node name="Border" parent="HBoxContainer/UndoSkillButton" index="1"]
-texture = ExtResource("3_mcmwq")
-
-[node name="Icon" parent="HBoxContainer/UndoSkillButton" index="2"]
-texture = ExtResource("4_vljid")
-
-[node name="RemoveSkillButton" parent="HBoxContainer" instance=ExtResource("1_7mfhr")]
+[node name="RemoveButton" parent="HBoxContainer" instance=ExtResource("1_7mfhr")]
 layout_mode = 2
+Icon = ExtResource("4_j4n1k")
+ButtonColor = 120.0
+Type = "Remove"
 
-[node name="Background" parent="HBoxContainer/RemoveSkillButton" index="0"]
-texture = ExtResource("2_hyhdc")
-
-[node name="Border" parent="HBoxContainer/RemoveSkillButton" index="1"]
-texture = ExtResource("3_mcmwq")
-
-[node name="Icon" parent="HBoxContainer/RemoveSkillButton" index="2"]
-texture = ExtResource("5_83aoy")
-
-[node name="SwitchSkillButton" parent="HBoxContainer" instance=ExtResource("1_7mfhr")]
+[node name="SwitchButton" parent="HBoxContainer" instance=ExtResource("1_7mfhr")]
 layout_mode = 2
+Icon = ExtResource("5_fnr5j")
+ButtonColor = 210.0
+Type = "Switch"
 
-[node name="Background" parent="HBoxContainer/SwitchSkillButton" index="0"]
-texture = ExtResource("2_hyhdc")
-
-[node name="Border" parent="HBoxContainer/SwitchSkillButton" index="1"]
-texture = ExtResource("3_mcmwq")
-
-[node name="Icon" parent="HBoxContainer/SwitchSkillButton" index="2"]
-texture = ExtResource("6_iw18e")
-
-[node name="RestartSkillButton" parent="HBoxContainer" instance=ExtResource("1_7mfhr")]
+[node name="RestartButton" parent="HBoxContainer" instance=ExtResource("1_7mfhr")]
 layout_mode = 2
-
-[node name="Background" parent="HBoxContainer/RestartSkillButton" index="0"]
-texture = ExtResource("2_hyhdc")
-
-[node name="Border" parent="HBoxContainer/RestartSkillButton" index="1"]
-texture = ExtResource("3_mcmwq")
-
-[node name="Icon" parent="HBoxContainer/RestartSkillButton" index="2"]
-texture = ExtResource("7_i007c")
-
-[editable path="HBoxContainer/UndoSkillButton"]
-[editable path="HBoxContainer/RemoveSkillButton"]
-[editable path="HBoxContainer/SwitchSkillButton"]
-[editable path="HBoxContainer/RestartSkillButton"]
+Icon = ExtResource("6_14lnm")
+ButtonColor = 300.0
+Type = "Restart"

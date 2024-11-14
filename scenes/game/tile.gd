@@ -1,5 +1,7 @@
 extends Container
 
+signal tile_selected(node: Node)
+
 var value = 0
 var colors = []
 var icons = []
@@ -7,6 +9,7 @@ var icons = []
 const speed = 30
 var is_moving = false
 var move_to : Vector2
+var input_disabled = true
 
 func _init():
 	for i in range(0, 11):
@@ -27,6 +30,11 @@ func _process(delta):
 		if abs(position.x - move_to.x) <= 0.1 and abs(position.y - move_to.y) <= 0.1:
 			position = move_to
 			is_moving = false
+
+func _on_gui_input(event):
+	if !input_disabled:
+		if event is InputEventScreenTouch:
+			tile_selected.emit(self)
 
 func set_icon(image: Texture):
 	$Icon.texture = image
@@ -63,3 +71,6 @@ func moving() -> bool:
 
 func get_score() -> int:
 	return 2 ** (value + 1) * (value + 1)
+
+func input_disable(val: bool):
+	input_disabled = val

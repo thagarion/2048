@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://dt57ogqeb0q7a"]
 
 [ext_resource type="Script" path="res://scenes/game/tile.gd" id="1_wxav5"]
-[ext_resource type="Texture2D" uid="uid://bnfd1qus1q8y8" path="res://textures/background.png" id="2_ka06h"]
+[ext_resource type="Texture2D" uid="uid://bnfd1qus1q8y8" path="res://textures/default/background.png" id="2_ka06h"]
 [ext_resource type="Texture2D" uid="uid://gx8c6ro3b8ry" path="res://textures/default/border.png" id="3_etqco"]
 [ext_resource type="Texture2D" uid="uid://ttljsnnqry7j" path="res://textures/default/0.png" id="4_ti3vu"]
 
@@ -49,7 +49,6 @@ offset_bottom = 130.0
 pivot_offset = Vector2(64, 64)
 size_flags_horizontal = 0
 size_flags_vertical = 0
-mouse_filter = 2
 theme_override_constants/margin_left = 1
 theme_override_constants/margin_top = 1
 theme_override_constants/margin_right = 1
@@ -72,3 +71,5 @@ texture = ExtResource("4_ti3vu")
 libraries = {
 "": SubResource("AnimationLibrary_6xegn")
 }
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]

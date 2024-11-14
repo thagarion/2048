@@ -18,6 +18,8 @@ const swiping_length = 30
 var swiping_start_position: Vector2
 var swiping_current_position: Vector2
 
+var is_remove = false
+
 func _ready():
 	for i in range(field_size):
 		tiles.append([])
@@ -30,8 +32,7 @@ func _ready():
 
 func _process(_delta):
 	if Input.is_action_just_pressed("restart"):
-		moving_disabled = true
-		$RestartGame.show()
+		restart()
 	if !moving_disabled:
 		if !wait_moving:
 			if Input.is_action_just_pressed("move rigth"):
@@ -72,11 +73,15 @@ func _on_gui_input(event):
 func _on_button_pressed():
 	start_game()
 
-func create_tile(i: int, j: int):
-	var tile = Tile.instantiate()
-	tiles[i][j] = tile
-	$Tiles.add_child(tile)
-	tile.position = Vector2(i*tile.size.x, j*tile.size.y)
+func _on_tile_selected(tile: Node):
+	for i in range(field_size):
+		for j in range(field_size):
+			if tile == tiles[i][j]:
+				tiles[i][j].queue_free()
+				tiles[i][j] = null
+				break
+	is_remove = false
+	close_remove()
 
 func _on_no_button_pressed():
 	$RestartGame.hide()
@@ -90,6 +95,30 @@ func _on_open_chest_gui_input(event):
 	if event is InputEventScreenTouch:
 		$OpenChest.hide()
 		moving_disabled = false
+
+func _on_remove_button_remove():
+	if is_remove:
+		close_remove()
+	else:
+		moving_disabled = true
+		$SelectTile.show()
+		is_remove = true
+		for i in range(field_size):
+			for j in range(field_size):
+				if tiles[i][j] != null:
+					tiles[i][j].input_disable(false)
+
+func _on_restart_button_restart():
+	restart()
+
+func close_remove():
+	is_remove = false
+	$SelectTile.hide()
+	moving_disabled = false
+	for i in range(field_size):
+		for j in range(field_size):
+			if tiles[i][j] != null:
+				tiles[i][j].input_disable(true)
 
 func create_random_tile():
 	var available = []
@@ -107,6 +136,13 @@ func create_random_tile():
 		$GameOver.show()
 		moving_disabled = true
 	score_signal.emit(score)
+
+func create_tile(i: int, j: int):
+	var tile = Tile.instantiate()
+	tiles[i][j] = tile
+	$Tiles.add_child(tile)
+	tile.position = Vector2(i*tile.size.x, j*tile.size.y)
+	tile.connect("tile_selected", _on_tile_selected)
 
 func start_game():
 	$GameOver.hide()
@@ -241,3 +277,7 @@ func is_tiles_moving() -> bool:
 			if item != null && item.moving():
 				return true
 	return false
+
+func restart():
+	moving_disabled = true
+	$RestartGame.show()

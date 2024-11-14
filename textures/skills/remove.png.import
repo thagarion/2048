@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://t0xp7b25cbqr"
-path="res://.godot/imported/chest1.png-1e282028d2c55d0db02b65c39eeb4637.ctex"
+uid="uid://cswnnfime5qxt"
+path="res://.godot/imported/remove.png-67c39ba6909c9f8333c08834fc37d3ec.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/chest1.png"
-dest_files=["res://.godot/imported/chest1.png-1e282028d2c55d0db02b65c39eeb4637.ctex"]
+source_file="res://textures/skills/remove.png"
+dest_files=["res://.godot/imported/remove.png-67c39ba6909c9f8333c08834fc37d3ec.ctex"]
 
 [params]
 

@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://wrk40jpq40e4"]
+
+[ext_resource type="Theme" uid="uid://bhocm5mxg1djc" path="res://scenes/popups/style.tres" id="1_ekwch"]
+
+[node name="SelectTile" type="Panel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_ekwch")

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://boyljuvdwcui8"
-path="res://.godot/imported/chest-shine1.png-f337d77684829c822ac602cc2abd2e5c.ctex"
+uid="uid://bnfd1qus1q8y8"
+path="res://.godot/imported/background.png-30737c879112c7dadb5eeb3291181c38.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/chest-shine1.png"
-dest_files=["res://.godot/imported/chest-shine1.png-f337d77684829c822ac602cc2abd2e5c.ctex"]
+source_file="res://textures/default/background.png"
+dest_files=["res://.godot/imported/background.png-30737c879112c7dadb5eeb3291181c38.ctex"]
 
 [params]
 

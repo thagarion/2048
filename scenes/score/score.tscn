@@ -3,12 +3,12 @@
 [ext_resource type="Script" path="res://scenes/score/score.gd" id="1_vka4g"]
 [ext_resource type="LabelSettings" uid="uid://dvhrfra0dkik3" path="res://scenes/score/label_settings.tres" id="2_x8m3q"]
 [ext_resource type="LabelSettings" uid="uid://cyu0axqbyh5ol" path="res://scenes/score/number_label_settings.tres" id="3_1pbcv"]
-[ext_resource type="Texture2D" uid="uid://qnft4x335ca5" path="res://textures/chest.png" id="3_enlha"]
-[ext_resource type="Texture2D" uid="uid://t0xp7b25cbqr" path="res://textures/chest1.png" id="4_76bmr"]
+[ext_resource type="Texture2D" uid="uid://qnft4x335ca5" path="res://textures/chest/chest.png" id="3_enlha"]
+[ext_resource type="Texture2D" uid="uid://t0xp7b25cbqr" path="res://textures/chest/chest1.png" id="4_76bmr"]
 [ext_resource type="LabelSettings" uid="uid://bf64bsp4jlhn3" path="res://scenes/score/add_number_label_settings.tres" id="4_xs4om"]
-[ext_resource type="Texture2D" uid="uid://cdhheib4icj6n" path="res://textures/chest2.png" id="5_ie1hv"]
-[ext_resource type="Texture2D" uid="uid://bx77htr5ep7og" path="res://textures/chest-shine2.png" id="6_8o8i4"]
-[ext_resource type="Texture2D" uid="uid://boyljuvdwcui8" path="res://textures/chest-shine1.png" id="7_ufsuw"]
+[ext_resource type="Texture2D" uid="uid://cdhheib4icj6n" path="res://textures/chest/chest2.png" id="5_ie1hv"]
+[ext_resource type="Texture2D" uid="uid://bx77htr5ep7og" path="res://textures/chest/chest-shine2.png" id="6_8o8i4"]
+[ext_resource type="Texture2D" uid="uid://boyljuvdwcui8" path="res://textures/chest/chest-shine1.png" id="7_ufsuw"]
 
 [sub_resource type="Animation" id="Animation_sqero"]
 length = 0.001
