@@ -52,6 +52,7 @@ size_flags_vertical = 4
 
 [connection signal="chest_open" from="CanvasLayer/MarginContainer/ScoreMarginContainer/Score" to="CanvasLayer/MarginContainer/GameMarginContainer/Game" method="_on_score_chest_open"]
 [connection signal="score_signal" from="CanvasLayer/MarginContainer/GameMarginContainer/Game" to="CanvasLayer/MarginContainer/ScoreMarginContainer/Score" method="_on_game_score_signal"]
+[connection signal="skill" from="CanvasLayer/MarginContainer/GameMarginContainer/Game" to="CanvasLayer/MarginContainer/SkillButtons/HBoxContainer/UndoButton" method="_on_game_skill"]
 [connection signal="remove" from="CanvasLayer/MarginContainer/SkillButtons/HBoxContainer/RemoveButton" to="CanvasLayer/MarginContainer/GameMarginContainer/Game" method="_on_remove_button_remove"]
 [connection signal="restart" from="CanvasLayer/MarginContainer/SkillButtons/HBoxContainer/RestartButton" to="CanvasLayer/MarginContainer/GameMarginContainer/Game" method="_on_restart_button_restart"]
 

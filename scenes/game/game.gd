@@ -1,6 +1,7 @@
 extends Container
 
 signal score_signal(value)
+signal skill(name: String)
 
 var Tile = preload("res://scenes/game/tile.tscn")
 
@@ -13,6 +14,7 @@ enum Move {Up, Down, Left, Right}
 var should_create_tile = false
 var wait_moving = false
 var moving_disabled = false
+
 var swiping = false
 const swiping_length = 30
 var swiping_start_position: Vector2
@@ -79,6 +81,7 @@ func _on_tile_selected(tile: Node):
 			if tile == tiles[i][j]:
 				tiles[i][j].queue_free()
 				tiles[i][j] = null
+				skill.emit("Remove")
 				break
 	is_remove = false
 	close_remove()

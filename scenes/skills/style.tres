@@ -1,6 +1,9 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://bi14pol6tu0ee"]
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://bi14pol6tu0ee"]
+
+[ext_resource type="FontFile" uid="uid://brfgvos0vqx5v" path="res://fonts/Neocyr.ttf" id="1_gp0mb"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hoauw"]
 
 [resource]
 Button/styles/focus = SubResource("StyleBoxEmpty_hoauw")
+Label/fonts/font = ExtResource("1_gp0mb")
