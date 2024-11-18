@@ -28,13 +28,10 @@ func _ready():
 		for j in range(field_size):
 			tiles[i].append(null)
 	$GameOver.z_index = 1
-	$RestartGame.z_index = 1
 	$OpenChest.z_index = 1
 	start_game()
 
 func _process(_delta):
-	if Input.is_action_just_pressed("restart"):
-		restart()
 	if !moving_disabled:
 		if !wait_moving:
 			if Input.is_action_just_pressed("move rigth"):
@@ -86,10 +83,6 @@ func _on_tile_selected(tile: Node):
 	is_remove = false
 	close_remove()
 
-func _on_no_button_pressed():
-	$RestartGame.hide()
-	moving_disabled = false
-
 func _on_score_chest_open():
 	moving_disabled = true
 	$OpenChest.show()
@@ -110,9 +103,6 @@ func _on_remove_button_remove():
 			for j in range(field_size):
 				if tiles[i][j] != null:
 					tiles[i][j].input_disable(false)
-
-func _on_restart_button_restart():
-	restart()
 
 func close_remove():
 	is_remove = false
@@ -149,7 +139,6 @@ func create_tile(i: int, j: int):
 
 func start_game():
 	$GameOver.hide()
-	$RestartGame.hide()
 	for i in range(field_size):
 		for j in range(field_size):
 			if tiles[i][j] != null:
@@ -281,6 +270,5 @@ func is_tiles_moving() -> bool:
 				return true
 	return false
 
-func restart():
-	moving_disabled = true
-	$RestartGame.show()
+func moving_disable(val: bool):
+	moving_disabled = val

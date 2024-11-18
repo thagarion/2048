@@ -1,28 +1,41 @@
-[gd_scene load_steps=5 format=3 uid="uid://d3ih2qk3pi8ou"]
+[gd_scene load_steps=8 format=3 uid="uid://d3ih2qk3pi8ou"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_iube1"]
 [ext_resource type="PackedScene" uid="uid://b25stsw7tbqv1" path="res://scenes/game/game.tscn" id="1_kbx01"]
+[ext_resource type="Texture2D" uid="uid://cdqgbb8xpkd5r" path="res://textures/default/main-background.png" id="2_lqn2g"]
 [ext_resource type="PackedScene" uid="uid://brw5qyf44k7ec" path="res://scenes/score/score.tscn" id="2_qer5e"]
 [ext_resource type="PackedScene" uid="uid://dqndh6v0oonvw" path="res://scenes/skills/skills.tscn" id="4_78tsy"]
+[ext_resource type="PackedScene" uid="uid://7tdcpd3vkwoq" path="res://scenes/popups/restart_game.tscn" id="5_k8x16"]
+[ext_resource type="PackedScene" uid="uid://wrk40jpq40e4" path="res://scenes/popups/select_tile.tscn" id="6_djs5n"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_iube1")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="MarginContainer" type="VBoxContainer" parent="CanvasLayer"]
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_lqn2g")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -270.0
-offset_top = -620.0
+offset_top = -704.0
 offset_right = 270.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="ScoreMarginContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer"]
+[node name="ScoreMarginContainer" type="MarginContainer" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 10
 theme_override_constants/margin_left = 20
@@ -30,10 +43,10 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 10
 
-[node name="Score" parent="CanvasLayer/MarginContainer/ScoreMarginContainer" instance=ExtResource("2_qer5e")]
+[node name="Score" parent="CanvasLayer/VBoxContainer/ScoreMarginContainer" instance=ExtResource("2_qer5e")]
 layout_mode = 2
 
-[node name="GameMarginContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer"]
+[node name="GameMarginContainer" type="MarginContainer" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 10
 theme_override_constants/margin_left = 10
@@ -41,19 +54,39 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="Game" parent="CanvasLayer/MarginContainer/GameMarginContainer" instance=ExtResource("1_kbx01")]
+[node name="Panel" type="Panel" parent="CanvasLayer/VBoxContainer/GameMarginContainer"]
+layout_mode = 2
+
+[node name="Game" parent="CanvasLayer/VBoxContainer/GameMarginContainer" instance=ExtResource("1_kbx01")]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(520, 520)
 layout_mode = 2
 
-[node name="SkillButtons" parent="CanvasLayer/MarginContainer" instance=ExtResource("4_78tsy")]
+[node name="RestartGamePopUp" parent="CanvasLayer/VBoxContainer/GameMarginContainer" instance=ExtResource("5_k8x16")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="SelectTilePopUp" parent="CanvasLayer/VBoxContainer/GameMarginContainer" instance=ExtResource("6_djs5n")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="SkillsMarginContainer" type="MarginContainer" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 10
+
+[node name="SkillButtons" parent="CanvasLayer/VBoxContainer/SkillsMarginContainer" instance=ExtResource("4_78tsy")]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[connection signal="chest_open" from="CanvasLayer/MarginContainer/ScoreMarginContainer/Score" to="CanvasLayer/MarginContainer/GameMarginContainer/Game" method="_on_score_chest_open"]
-[connection signal="score_signal" from="CanvasLayer/MarginContainer/GameMarginContainer/Game" to="CanvasLayer/MarginContainer/ScoreMarginContainer/Score" method="_on_game_score_signal"]
-[connection signal="skill" from="CanvasLayer/MarginContainer/GameMarginContainer/Game" to="CanvasLayer/MarginContainer/SkillButtons/HBoxContainer/UndoButton" method="_on_game_skill"]
-[connection signal="remove" from="CanvasLayer/MarginContainer/SkillButtons/HBoxContainer/RemoveButton" to="CanvasLayer/MarginContainer/GameMarginContainer/Game" method="_on_remove_button_remove"]
-[connection signal="restart" from="CanvasLayer/MarginContainer/SkillButtons/HBoxContainer/RestartButton" to="CanvasLayer/MarginContainer/GameMarginContainer/Game" method="_on_restart_button_restart"]
+[connection signal="chest_open" from="CanvasLayer/VBoxContainer/ScoreMarginContainer/Score" to="CanvasLayer/VBoxContainer/GameMarginContainer/Game" method="_on_score_chest_open"]
+[connection signal="score_signal" from="CanvasLayer/VBoxContainer/GameMarginContainer/Game" to="CanvasLayer/VBoxContainer/ScoreMarginContainer/Score" method="_on_game_score_signal"]
+[connection signal="skill" from="CanvasLayer/VBoxContainer/GameMarginContainer/Game" to="CanvasLayer/VBoxContainer/SkillsMarginContainer/SkillButtons/HBoxContainer/UndoButton" method="_on_game_skill"]
+[connection signal="restart_no" from="CanvasLayer/VBoxContainer/GameMarginContainer/RestartGamePopUp" to="." method="_on_restart_game_pop_up_restart_no"]
+[connection signal="restart_yes" from="CanvasLayer/VBoxContainer/GameMarginContainer/RestartGamePopUp" to="." method="_on_restart_game_pop_up_restart_yes"]
+[connection signal="remove" from="CanvasLayer/VBoxContainer/SkillsMarginContainer/SkillButtons/HBoxContainer/RemoveButton" to="CanvasLayer/VBoxContainer/GameMarginContainer/Game" method="_on_remove_button_remove"]
+[connection signal="restart" from="CanvasLayer/VBoxContainer/SkillsMarginContainer/SkillButtons/HBoxContainer/RestartButton" to="." method="_on_restart_button_restart"]
 
-[editable path="CanvasLayer/MarginContainer/SkillButtons"]
+[editable path="CanvasLayer/VBoxContainer/SkillsMarginContainer/SkillButtons"]
