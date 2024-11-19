@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_iube1"]
 [ext_resource type="PackedScene" uid="uid://b25stsw7tbqv1" path="res://scenes/game/game.tscn" id="1_kbx01"]
-[ext_resource type="Texture2D" uid="uid://cdqgbb8xpkd5r" path="res://textures/default/main-background.png" id="2_lqn2g"]
+[ext_resource type="Texture2D" uid="uid://uhp3t7isu0or" path="res://textures/default/background2.png" id="2_304ti"]
 [ext_resource type="PackedScene" uid="uid://brw5qyf44k7ec" path="res://scenes/score/score.tscn" id="2_qer5e"]
 [ext_resource type="PackedScene" uid="uid://dqndh6v0oonvw" path="res://scenes/skills/skills.tscn" id="4_78tsy"]
 [ext_resource type="PackedScene" uid="uid://7tdcpd3vkwoq" path="res://scenes/popups/restart_game.tscn" id="5_k8x16"]
@@ -19,9 +19,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_lqn2g")
-expand_mode = 3
-stretch_mode = 4
+texture = ExtResource("2_304ti")
+expand_mode = 5
+stretch_mode = 5
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
 anchors_preset = 7
@@ -57,6 +57,11 @@ theme_override_constants/margin_bottom = 10
 [node name="Panel" type="Panel" parent="CanvasLayer/VBoxContainer/GameMarginContainer"]
 layout_mode = 2
 
+[node name="SelectTilePopUp" parent="CanvasLayer/VBoxContainer/GameMarginContainer" instance=ExtResource("6_djs5n")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
 [node name="Game" parent="CanvasLayer/VBoxContainer/GameMarginContainer" instance=ExtResource("1_kbx01")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(520, 520)
@@ -67,19 +72,16 @@ unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
-[node name="SelectTilePopUp" parent="CanvasLayer/VBoxContainer/GameMarginContainer" instance=ExtResource("6_djs5n")]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-
 [node name="SkillsMarginContainer" type="MarginContainer" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_bottom = 10
 
 [node name="SkillButtons" parent="CanvasLayer/VBoxContainer/SkillsMarginContainer" instance=ExtResource("4_78tsy")]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme = null
 
 [connection signal="chest_open" from="CanvasLayer/VBoxContainer/ScoreMarginContainer/Score" to="CanvasLayer/VBoxContainer/GameMarginContainer/Game" method="_on_score_chest_open"]
 [connection signal="score_signal" from="CanvasLayer/VBoxContainer/GameMarginContainer/Game" to="CanvasLayer/VBoxContainer/ScoreMarginContainer/Score" method="_on_game_score_signal"]

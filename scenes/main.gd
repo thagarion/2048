@@ -23,4 +23,3 @@ func restart():
 	%Game.moving_disable(true)
 	%RestartGamePopUp.show()
 
-

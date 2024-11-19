@@ -5,5 +5,7 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hoauw"]
 
 [resource]
+default_font_size = 0
 Button/styles/focus = SubResource("StyleBoxEmpty_hoauw")
+Label/font_sizes/font_size = 36
 Label/fonts/font = ExtResource("1_gp0mb")

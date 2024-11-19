@@ -78,7 +78,7 @@ func _on_tile_selected(tile: Node):
 			if tile == tiles[i][j]:
 				tiles[i][j].queue_free()
 				tiles[i][j] = null
-				skill.emit("Remove")
+				%SkillButtons.remove_update_count(-1)
 				break
 	is_remove = false
 	close_remove()
@@ -97,7 +97,7 @@ func _on_remove_button_remove():
 		close_remove()
 	else:
 		moving_disabled = true
-		$SelectTile.show()
+		%SelectTilePopUp.show()
 		is_remove = true
 		for i in range(field_size):
 			for j in range(field_size):
@@ -106,7 +106,7 @@ func _on_remove_button_remove():
 
 func close_remove():
 	is_remove = false
-	$SelectTile.hide()
+	%SelectTilePopUp.hide()
 	moving_disabled = false
 	for i in range(field_size):
 		for j in range(field_size):
