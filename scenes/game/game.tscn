@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://b25stsw7tbqv1"]
+[gd_scene load_steps=3 format=3 uid="uid://b25stsw7tbqv1"]
 
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_xvv4q"]
 [ext_resource type="PackedScene" uid="uid://blyg22inh2gsf" path="res://scenes/popups/game_over.tscn" id="2_fd4ve"]
-[ext_resource type="PackedScene" uid="uid://ckcsmldlj0vex" path="res://scenes/popups/open_chest.tscn" id="4_3r50n"]
 
 [node name="Game" type="Container"]
 anchors_preset = 8
@@ -24,12 +23,7 @@ visible = false
 layout_mode = 2
 script = null
 
-[node name="OpenChest" parent="." instance=ExtResource("4_3r50n")]
-visible = false
-layout_mode = 2
-
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="pressed" from="GameOver/VBoxContainer/Button" to="." method="_on_button_pressed"]
-[connection signal="gui_input" from="OpenChest" to="." method="_on_open_chest_gui_input"]
 
 [editable path="GameOver"]

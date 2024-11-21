@@ -19,6 +19,15 @@ func _on_restart_game_pop_up_restart_yes():
 	%Game.moving_disable(false)
 	%RestartGamePopUp.hide()
 
+func _on_score_chest_open():
+	%Game.moving_disable(true)
+	%OpenChestPopUp.show()
+
+func _on_open_chest_pop_up_gui_input(event):
+	if event is InputEventScreenTouch:
+		%OpenChestPopUp.hide()
+		%Game.moving_disable(false)
+
 func restart():
 	%Game.moving_disable(true)
 	%RestartGamePopUp.show()

@@ -28,7 +28,6 @@ func _ready():
 		for j in range(field_size):
 			tiles[i].append(null)
 	$GameOver.z_index = 1
-	$OpenChest.z_index = 1
 	start_game()
 
 func _process(_delta):
@@ -82,15 +81,6 @@ func _on_tile_selected(tile: Node):
 				break
 	is_remove = false
 	close_remove()
-
-func _on_score_chest_open():
-	moving_disabled = true
-	$OpenChest.show()
-
-func _on_open_chest_gui_input(event):
-	if event is InputEventScreenTouch:
-		$OpenChest.hide()
-		moving_disabled = false
 
 func _on_remove_button_remove():
 	if is_remove:
