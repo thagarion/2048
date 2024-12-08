@@ -16,7 +16,7 @@ var wait_moving = false
 var moving_disabled = false
 
 var swiping = false
-const swiping_length = 30
+const swiping_length = 15
 var swiping_start_position: Vector2
 var swiping_current_position: Vector2
 

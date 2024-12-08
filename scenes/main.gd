@@ -21,7 +21,7 @@ func _on_restart_game_pop_up_restart_yes():
 
 func _on_score_chest_open():
 	%Game.moving_disable(true)
-	%OpenChestPopUp.show()
+	%OpenChestPopUp.open(Items.get_random_skill())
 
 func _on_open_chest_pop_up_gui_input(event):
 	if event is InputEventScreenTouch:
@@ -31,4 +31,3 @@ func _on_open_chest_pop_up_gui_input(event):
 func restart():
 	%Game.moving_disable(true)
 	%RestartGamePopUp.show()
-
