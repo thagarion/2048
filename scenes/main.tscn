@@ -1,8 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://d3ih2qk3pi8ou"]
+[gd_scene load_steps=8 format=3 uid="uid://d3ih2qk3pi8ou"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_iube1"]
 [ext_resource type="PackedScene" uid="uid://b25stsw7tbqv1" path="res://scenes/game/game.tscn" id="1_kbx01"]
-[ext_resource type="Texture2D" uid="uid://uhp3t7isu0or" path="res://textures/default/background2.png" id="2_304ti"]
 [ext_resource type="PackedScene" uid="uid://brw5qyf44k7ec" path="res://scenes/score/score.tscn" id="2_qer5e"]
 [ext_resource type="PackedScene" uid="uid://dqndh6v0oonvw" path="res://scenes/skills/skills.tscn" id="4_78tsy"]
 [ext_resource type="PackedScene" uid="uid://7tdcpd3vkwoq" path="res://scenes/popups/restart_game.tscn" id="5_k8x16"]
@@ -20,7 +19,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_304ti")
+size_flags_horizontal = 3
 expand_mode = 4
 stretch_mode = 6
 

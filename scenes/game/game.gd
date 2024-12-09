@@ -8,6 +8,7 @@ var Tile = preload("res://scenes/game/tile.tscn")
 var tiles = []
 const field_size = 4
 const tiles_at_start = 2
+var pack_name : String
 
 enum Move {Up, Down, Left, Right}
 
@@ -28,7 +29,7 @@ func _ready():
 		for j in range(field_size):
 			tiles[i].append(null)
 	$GameOver.z_index = 1
-	start_game()
+	#start_game()
 
 func _process(_delta):
 	if !moving_disabled:
@@ -94,6 +95,9 @@ func _on_remove_button_remove():
 				if tiles[i][j] != null:
 					tiles[i][j].input_disable(false)
 
+func set_pack(pack: String):
+	pack_name = pack
+
 func close_remove():
 	is_remove = false
 	%SelectTilePopUp.hide()
@@ -122,6 +126,7 @@ func create_random_tile():
 
 func create_tile(i: int, j: int):
 	var tile = Tile.instantiate()
+	tile.set_pack(pack_name)
 	tiles[i][j] = tile
 	$Tiles.add_child(tile)
 	tile.position = Vector2(i*tile.size.x, j*tile.size.y)

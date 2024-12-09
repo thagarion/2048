@@ -1,10 +1,10 @@
 [gd_scene load_steps=9 format=3 uid="uid://ckcsmldlj0vex"]
 
 [ext_resource type="Theme" uid="uid://bhocm5mxg1djc" path="res://scenes/popups/style.tres" id="1_liqxc"]
-[ext_resource type="Texture2D" uid="uid://bf1rmli58nw3y" path="res://textures/chest/chest-undo.png" id="2_1vvr6"]
 [ext_resource type="Texture2D" uid="uid://d0g7qa7ekue5x" path="res://textures/chest/open-chest2.png" id="2_b7buc"]
 [ext_resource type="Script" path="res://scenes/popups/open_chest.gd" id="2_jthl1"]
 [ext_resource type="Texture2D" uid="uid://d120s2t62owbo" path="res://textures/chest/open-chest1.png" id="3_4o7dd"]
+[ext_resource type="Texture2D" uid="uid://d4ib22sm2w5b2" path="res://textures/packs/default/0.png" id="3_faq8m"]
 
 [sub_resource type="Animation" id="Animation_jnsds"]
 length = 0.001
@@ -43,6 +43,30 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("VBoxContainer/NameLabel:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("VBoxContainer/DescriptionLabel:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_d4oxl"]
@@ -83,6 +107,30 @@ tracks/2/keys = {
 "update": 1,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("VBoxContainer/NameLabel:modulate")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.9, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("VBoxContainer/DescriptionLabel:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.9, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_u8lp3"]
 _data = {
@@ -117,10 +165,11 @@ grow_vertical = 2
 layout_mode = 2
 
 [node name="GiftTextureRect" type="TextureRect" parent="VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(256, 256)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = ExtResource("2_1vvr6")
+texture = ExtResource("3_faq8m")
 
 [node name="ChestTextureRect" type="TextureRect" parent="VBoxContainer/MarginContainer"]
 layout_mode = 2
@@ -128,10 +177,18 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("2_b7buc")
 
-[node name="Label" type="Label" parent="VBoxContainer"]
+[node name="NameLabel" type="Label" parent="VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 4
-text = "Gift"
+text = "Name"
+horizontal_alignment = 1
+
+[node name="DescriptionLabel" type="Label" parent="VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Description"
 horizontal_alignment = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
