@@ -29,7 +29,6 @@ func _ready():
 		for j in range(field_size):
 			tiles[i].append(null)
 	$GameOver.z_index = 1
-	#start_game()
 
 func _process(_delta):
 	if !moving_disabled:
@@ -87,7 +86,7 @@ func _on_remove_button_remove():
 	if is_remove:
 		close_remove()
 	else:
-		moving_disabled = true
+		moving_disable(true)
 		%SelectTilePopUp.show()
 		is_remove = true
 		for i in range(field_size):
@@ -101,7 +100,7 @@ func set_pack(pack: String):
 func close_remove():
 	is_remove = false
 	%SelectTilePopUp.hide()
-	moving_disabled = false
+	moving_disable(false)
 	for i in range(field_size):
 		for j in range(field_size):
 			if tiles[i][j] != null:
@@ -121,7 +120,7 @@ func create_random_tile():
 		create_tile(available[index].x, available[index].y)
 	if available.size() == 1 && is_game_over():
 		$GameOver.show()
-		moving_disabled = true
+		moving_disable(true)
 	score_signal.emit(score)
 
 func create_tile(i: int, j: int):
@@ -146,7 +145,7 @@ func start_game():
 		if tiles[i][j] == null:
 			create_tile(i, j)
 			tiles_count += 1
-	moving_disabled = false
+	moving_disable(false)
 	score_signal.emit(0)
 
 func is_game_over() -> bool:
@@ -267,3 +266,7 @@ func is_tiles_moving() -> bool:
 
 func moving_disable(val: bool):
 	moving_disabled = val
+	if moving_disabled:
+		$Tiles.mouse_filter = MOUSE_FILTER_IGNORE
+	else:
+		$Tiles.mouse_filter = MOUSE_FILTER_PASS

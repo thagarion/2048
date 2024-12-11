@@ -14,7 +14,7 @@ static var backgrounds = {}
 
 static var random = RandomNumberGenerator.new()
 
-func _ready():
+func _init():
 	var item_remove = Item.new()
 	item_remove.name = "Remove"
 	item_remove.texture = load("res://textures/skills/remove.png")
@@ -37,18 +37,15 @@ func _ready():
 	if texture_packs_dir:
 		for pack_name in texture_packs_dir.get_directories():
 			packs[pack_name] = []
-			for file_name in DirAccess.open("res://textures/packs/" + pack_name).get_files():
-				if file_name.ends_with(".png"):
-					var texture = load("res://textures/packs/" + pack_name + "/" + file_name)
-					if !file_name.begins_with("background"):
-						var item = Item.new()
-						item.name = "Tile #" + file_name.get_basename()
-						item.texture = texture
-						item.description = str(pack_name.get_basename()).capitalize() + " set"
-						textures.append(item)
-						packs[pack_name].append(texture)
-					else:
-						backgrounds[pack_name] = texture
+			packs[pack_name].resize(11)
+			for index in range(0, 11):
+				var item = Item.new()
+				item.name = "Tile #" + str(index)
+				item.texture = load("res://textures/packs/" + pack_name + "/" + str(index) + ".png")
+				item.description = str(pack_name.get_basename()).capitalize() + " set"
+				textures.append(item)
+				packs[pack_name][index] = item
+			backgrounds[pack_name] = load("res://textures/packs/" + pack_name + "/" + "background.png")
 
 static func get_random_item() -> Item:
 	random.randomize()
@@ -62,7 +59,7 @@ static func get_random_pack() -> String:
 	return packs.keys().pick_random()
 
 static func get_pack(pack_name: String) -> Array:
-	return packs.get(pack_name)
+	return packs[pack_name]
 
 static func get_background(pack_name: String) -> Texture:
-	return backgrounds.get(pack_name)
+	return backgrounds[pack_name]

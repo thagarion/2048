@@ -47,7 +47,6 @@ scale = Vector2(1e-05, 1e-05)
 pivot_offset = Vector2(64, 64)
 size_flags_horizontal = 0
 size_flags_vertical = 0
-mouse_filter = 2
 theme_override_constants/margin_left = 1
 theme_override_constants/margin_top = 1
 theme_override_constants/margin_right = 1

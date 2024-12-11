@@ -19,3 +19,7 @@ mono_crash.*.json
 # Android
 *.apk*
 android/
+
+# Windows
+*.exe
+*.pck
