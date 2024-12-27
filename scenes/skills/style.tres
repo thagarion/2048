@@ -1,11 +1,56 @@
-[gd_resource type="Theme" load_steps=3 format=3 uid="uid://bi14pol6tu0ee"]
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://bi14pol6tu0ee"]
 
 [ext_resource type="FontFile" uid="uid://brfgvos0vqx5v" path="res://fonts/Neocyr.ttf" id="1_gp0mb"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hoauw"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o2ne6"]
+bg_color = Color(0, 0, 0, 0.301961)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.281187, 0.281187, 0.281187, 1)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tu1cx"]
+bg_color = Color(0, 0, 0, 0.482353)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_i3cdf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fqg03"]
+bg_color = Color(0, 0, 0, 0.25098)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+anti_aliasing_size = 3.0
+
 [resource]
 default_font_size = 0
+Button/colors/font_color = Color(0.967851, 0.36347, 0.960679, 1)
+Button/font_sizes/font_size = 26
+Button/fonts/font = ExtResource("1_gp0mb")
 Button/styles/focus = SubResource("StyleBoxEmpty_hoauw")
+Button/styles/hover = SubResource("StyleBoxFlat_o2ne6")
+Button/styles/normal = SubResource("StyleBoxFlat_tu1cx")
+Button/styles/pressed = SubResource("StyleBoxEmpty_i3cdf")
+Label/colors/font_outline_color = Color(0, 0, 0, 1)
+Label/constants/outline_size = 2
 Label/font_sizes/font_size = 36
 Label/fonts/font = ExtResource("1_gp0mb")
+Panel/styles/panel = SubResource("StyleBoxFlat_fqg03")

@@ -4,8 +4,9 @@ class_name Items
 
 class Item:
 	var name: String
-	var texture :Texture
+	var texture: Texture
 	var description: String
+	var is_skill: bool
 
 static var skills = []
 static var textures = []
@@ -18,19 +19,22 @@ func _init():
 	var item_remove = Item.new()
 	item_remove.name = "Remove"
 	item_remove.texture = load("res://textures/skills/remove.png")
-	item_remove.description = "Removed one tile"
+	item_remove.description = "Remove one tile"
+	item_remove.is_skill = true
 	skills.append(item_remove)
 	
 	var item_undo = Item.new()
 	item_undo.name = "Undo"
 	item_undo.texture = load("res://textures/skills/undo.png")
 	item_undo.description = "Undo last step"
+	item_undo.is_skill = true
 	skills.append(item_undo)
 	
 	var item_switch = Item.new()
-	item_switch.name = "Undo"
+	item_switch.name = "Switch"
 	item_switch.texture = load("res://textures/skills/switch.png")
-	item_switch.description = "Undo last step"
+	item_switch.description = "Switch tiles"
+	item_switch.is_skill = true
 	skills.append(item_switch)
 	
 	var texture_packs_dir = DirAccess.open("res://textures/packs")

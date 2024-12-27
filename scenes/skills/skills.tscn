@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dqndh6v0oonvw"]
+[gd_scene load_steps=7 format=3 uid="uid://dqndh6v0oonvw"]
 
 [ext_resource type="PackedScene" uid="uid://csgeoogjfhxe5" path="res://scenes/skills/skill_button.tscn" id="1_7mfhr"]
 [ext_resource type="Theme" uid="uid://bi14pol6tu0ee" path="res://scenes/skills/style.tres" id="1_wwoyh"]
@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://bmbsgvjy33e1x" path="res://textures/skills/undo.png" id="2_s8bnj"]
 [ext_resource type="Texture2D" uid="uid://cswnnfime5qxt" path="res://textures/skills/remove.png" id="4_j4n1k"]
 [ext_resource type="Texture2D" uid="uid://wyts51nke08t" path="res://textures/skills/switch.png" id="5_fnr5j"]
-[ext_resource type="Texture2D" uid="uid://p7dh7pjwv5vg" path="res://textures/skills/restart.png" id="6_14lnm"]
 
 [node name="SkillButtons" type="VBoxContainer"]
 anchors_preset = 5
@@ -43,6 +42,5 @@ Type = "Switch"
 
 [node name="RestartButton" parent="HBoxContainer" instance=ExtResource("1_7mfhr")]
 layout_mode = 2
-Icon = ExtResource("6_14lnm")
 ButtonColor = 300.0
 Type = "Restart"

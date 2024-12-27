@@ -15,11 +15,12 @@ var color = 0.0
 func _ready():
 	color = ButtonColor / 360.0
 	$Panel/VBoxContainer/ButtonMarginContainer/Icon.texture = Icon
-	$Panel/VBoxContainer/ButtonMarginContainer/Icon.modulate = Color.from_hsv(color, 1, 0.6, 1)
-	$Panel/VBoxContainer/ButtonMarginContainer/Button.modulate = Color.from_hsv(color, 1, 0.6, 1)
 	update_count(3)
 	if Type == "Restart":
 		$Panel/VBoxContainer/LabelMarginContainer.hide()
+		$Panel/VBoxContainer/ButtonMarginContainer/Button.text = "Restart"
+	else:
+		$Panel/VBoxContainer/ButtonMarginContainer/Button.modulate = Color.from_hsv(color, 1, 0.6, 1)
 
 func _on_button_pressed():
 	if Type == "Restart" || count > 0:

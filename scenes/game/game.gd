@@ -77,7 +77,7 @@ func _on_tile_selected(tile: Node):
 			if tile == tiles[i][j]:
 				tiles[i][j].queue_free()
 				tiles[i][j] = null
-				%SkillButtons.remove_update_count(-1)
+				%SkillButtons.update_skill_count("Remove", -1)
 				break
 	is_remove = false
 	close_remove()

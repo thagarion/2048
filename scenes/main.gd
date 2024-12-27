@@ -25,8 +25,11 @@ func _on_restart_game_pop_up_restart_yes():
 	%RestartGamePopUp.hide()
 
 func _on_score_chest_open():
+	var item = Items.get_random_item()
 	%Game.moving_disable(true)
-	%OpenChestPopUp.open(Items.get_random_item())
+	%OpenChestPopUp.open(item)
+	if item.is_skill:
+		%SkillButtons.update_skill_count(item.name, 1)
 
 func _on_open_chest_pop_up_gui_input(event):
 	if event is InputEventScreenTouch:
