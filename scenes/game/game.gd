@@ -22,6 +22,8 @@ var swiping_start_position: Vector2
 var swiping_current_position: Vector2
 
 var is_remove = false
+var is_switch = false
+var switch_tile = null
 
 func _ready():
 	for i in range(field_size):
@@ -75,30 +77,65 @@ func _on_tile_selected(tile: Node):
 	for i in range(field_size):
 		for j in range(field_size):
 			if tile == tiles[i][j]:
-				tiles[i][j].queue_free()
-				tiles[i][j] = null
-				%SkillButtons.update_skill_count("Remove", -1)
-				break
-	is_remove = false
-	close_remove()
+				if is_remove:
+					tiles[i][j].queue_free()
+					tiles[i][j] = null
+					%SkillButtons.update_skill_count("Remove", -1)
+					close_selection()
+					return
+				if is_switch:
+					if switch_tile == null:
+						switch_tile = Vector2(i, j)
+						return
+					elif Vector2(i, j) != switch_tile:
+						var temp = tiles[switch_tile.x][switch_tile.y]
+						tiles[i][j].move(switch_tile.x, switch_tile.y)
+						tiles[switch_tile.x][switch_tile.y] = tiles[i][j]
+						temp.move(i, j)
+						tiles[i][j] = temp
+						is_switch = false
+						%SkillButtons.update_skill_count("Switch", -1)
+						close_selection()
+						return
 
 func _on_remove_button_remove():
-	if is_remove:
-		close_remove()
-	else:
+	if get_tiles_count() >= 2:
 		moving_disable(true)
 		%SelectTilePopUp.show()
+		z_index = 1
 		is_remove = true
 		for i in range(field_size):
 			for j in range(field_size):
 				if tiles[i][j] != null:
 					tiles[i][j].input_disable(false)
 
+func _on_switch_button_switch():
+	if get_tiles_count() >= 2:
+		moving_disable(true)
+		%SelectTilePopUp.show()
+		z_index = 1
+		is_switch = true
+		for i in range(field_size):
+			for j in range(field_size):
+				if tiles[i][j] != null:
+					tiles[i][j].input_disable(false)
+
+func get_tiles_count() -> int:
+	var result = 0
+	for i in range(field_size):
+			for j in range(field_size):
+				if tiles[i][j] != null:
+					result += 1
+	return result
+
 func set_pack(pack: String):
 	pack_name = pack
 
-func close_remove():
+func close_selection():
 	is_remove = false
+	is_switch = false
+	switch_tile = null
+	z_index = 0
 	%SelectTilePopUp.hide()
 	moving_disable(false)
 	for i in range(field_size):

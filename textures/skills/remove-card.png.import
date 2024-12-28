@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://p7dh7pjwv5vg"
-path="res://.godot/imported/restart.png-dfde0db11a3b79550a83d7ec35153f8b.ctex"
+uid="uid://dgd58dp810n8t"
+path="res://.godot/imported/remove-card.png-f2b692fc5898980ede38dee28e914f64.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/skills/restart.png"
-dest_files=["res://.godot/imported/restart.png-dfde0db11a3b79550a83d7ec35153f8b.ctex"]
+source_file="res://textures/skills/remove-card.png"
+dest_files=["res://.godot/imported/remove-card.png-f2b692fc5898980ede38dee28e914f64.ctex"]
 
 [params]
 

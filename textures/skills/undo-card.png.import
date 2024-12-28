@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dy01sj0edtalt"
-path="res://.godot/imported/background.png-3b0483cddbace25651eb90f7f49187ab.ctex"
+uid="uid://ch40hduxea3on"
+path="res://.godot/imported/undo-card.png-f0064f346e5af6225b07c52149f65f3d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/skills/background.png"
-dest_files=["res://.godot/imported/background.png-3b0483cddbace25651eb90f7f49187ab.ctex"]
+source_file="res://textures/skills/undo-card.png"
+dest_files=["res://.godot/imported/undo-card.png-f0064f346e5af6225b07c52149f65f3d.ctex"]
 
 [params]
 

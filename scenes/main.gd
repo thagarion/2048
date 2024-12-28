@@ -5,7 +5,7 @@ var pack_name : String
 func _ready():
 	pack_name = Items.get_random_pack()
 	%Game.set_pack(pack_name)
-	$CanvasLayer/TextureRect.texture = Items.get_background(pack_name)
+	$MainCanvasLayer/TextureRect.texture = Items.get_background(pack_name)
 	%Game.start_game()
 
 func _process(_delta):

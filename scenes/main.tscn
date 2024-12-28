@@ -11,9 +11,9 @@
 [node name="Main" type="Node2D"]
 script = ExtResource("1_iube1")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="MainCanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+[node name="TextureRect" type="TextureRect" parent="MainCanvasLayer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -23,7 +23,7 @@ size_flags_horizontal = 3
 expand_mode = 4
 stretch_mode = 6
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainCanvasLayer"]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -35,7 +35,7 @@ offset_right = 270.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="ScoreMarginContainer" type="MarginContainer" parent="CanvasLayer/VBoxContainer"]
+[node name="ScoreMarginContainer" type="MarginContainer" parent="MainCanvasLayer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 10
 theme_override_constants/margin_left = 20
@@ -43,58 +43,74 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 10
 
-[node name="Score" parent="CanvasLayer/VBoxContainer/ScoreMarginContainer" instance=ExtResource("2_qer5e")]
+[node name="Score" parent="MainCanvasLayer/VBoxContainer/ScoreMarginContainer" instance=ExtResource("2_qer5e")]
 layout_mode = 2
 
-[node name="GameMarginContainer" type="MarginContainer" parent="CanvasLayer/VBoxContainer"]
+[node name="Panel" type="Panel" parent="MainCanvasLayer/VBoxContainer"]
+custom_minimum_size = Vector2(520, 540)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="GameCanvasLayer" type="CanvasLayer" parent="MainCanvasLayer/VBoxContainer"]
+layer = 2
+
+[node name="GameMarginContainer" type="MarginContainer" parent="MainCanvasLayer/VBoxContainer/GameCanvasLayer"]
+offset_top = 310.0
+offset_right = 540.0
+offset_bottom = 850.0
 size_flags_vertical = 10
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="Panel" type="Panel" parent="CanvasLayer/VBoxContainer/GameMarginContainer"]
+[node name="Panel" type="Panel" parent="MainCanvasLayer/VBoxContainer/GameCanvasLayer/GameMarginContainer"]
 layout_mode = 2
 
-[node name="SelectTilePopUp" parent="CanvasLayer/VBoxContainer/GameMarginContainer" instance=ExtResource("6_djs5n")]
+[node name="Game" parent="MainCanvasLayer/VBoxContainer/GameCanvasLayer/GameMarginContainer" instance=ExtResource("1_kbx01")]
 unique_name_in_owner = true
-visible = false
-layout_mode = 2
-
-[node name="Game" parent="CanvasLayer/VBoxContainer/GameMarginContainer" instance=ExtResource("1_kbx01")]
-unique_name_in_owner = true
+visibility_layer = 2
+z_as_relative = false
 custom_minimum_size = Vector2(520, 520)
 layout_mode = 2
 
-[node name="RestartGamePopUp" parent="CanvasLayer/VBoxContainer/GameMarginContainer" instance=ExtResource("5_k8x16")]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-
-[node name="OpenChestPopUp" parent="CanvasLayer/VBoxContainer/GameMarginContainer" instance=ExtResource("7_6cf5g")]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-
-[node name="SkillsMarginContainer" type="MarginContainer" parent="CanvasLayer/VBoxContainer"]
+[node name="SkillsMarginContainer" type="MarginContainer" parent="MainCanvasLayer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_bottom = 10
 
-[node name="SkillButtons" parent="CanvasLayer/VBoxContainer/SkillsMarginContainer" instance=ExtResource("4_78tsy")]
+[node name="SkillButtons" parent="MainCanvasLayer/VBoxContainer/SkillsMarginContainer" instance=ExtResource("4_78tsy")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = null
 
-[connection signal="chest_open" from="CanvasLayer/VBoxContainer/ScoreMarginContainer/Score" to="." method="_on_score_chest_open"]
-[connection signal="score_signal" from="CanvasLayer/VBoxContainer/GameMarginContainer/Game" to="CanvasLayer/VBoxContainer/ScoreMarginContainer/Score" method="_on_game_score_signal"]
-[connection signal="skill" from="CanvasLayer/VBoxContainer/GameMarginContainer/Game" to="CanvasLayer/VBoxContainer/SkillsMarginContainer/SkillButtons/HBoxContainer/UndoButton" method="_on_game_skill"]
-[connection signal="restart_no" from="CanvasLayer/VBoxContainer/GameMarginContainer/RestartGamePopUp" to="." method="_on_restart_game_pop_up_restart_no"]
-[connection signal="restart_yes" from="CanvasLayer/VBoxContainer/GameMarginContainer/RestartGamePopUp" to="." method="_on_restart_game_pop_up_restart_yes"]
-[connection signal="gui_input" from="CanvasLayer/VBoxContainer/GameMarginContainer/OpenChestPopUp" to="." method="_on_open_chest_pop_up_gui_input"]
-[connection signal="remove" from="CanvasLayer/VBoxContainer/SkillsMarginContainer/SkillButtons/HBoxContainer/RemoveButton" to="CanvasLayer/VBoxContainer/GameMarginContainer/Game" method="_on_remove_button_remove"]
-[connection signal="restart" from="CanvasLayer/VBoxContainer/SkillsMarginContainer/SkillButtons/HBoxContainer/RestartButton" to="." method="_on_restart_button_restart"]
+[node name="SelectTilePopUp" parent="MainCanvasLayer" instance=ExtResource("6_djs5n")]
+unique_name_in_owner = true
+visible = false
 
-[editable path="CanvasLayer/VBoxContainer/SkillsMarginContainer/SkillButtons"]
+[node name="PopUpCanvasLayer" type="CanvasLayer" parent="."]
+layer = 3
+
+[node name="OpenChestPopUp" parent="PopUpCanvasLayer" instance=ExtResource("7_6cf5g")]
+unique_name_in_owner = true
+visible = false
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="RestartGamePopUp" parent="PopUpCanvasLayer" instance=ExtResource("5_k8x16")]
+unique_name_in_owner = true
+visible = false
+
+[connection signal="chest_open" from="MainCanvasLayer/VBoxContainer/ScoreMarginContainer/Score" to="." method="_on_score_chest_open"]
+[connection signal="score_signal" from="MainCanvasLayer/VBoxContainer/GameCanvasLayer/GameMarginContainer/Game" to="MainCanvasLayer/VBoxContainer/ScoreMarginContainer/Score" method="_on_game_score_signal"]
+[connection signal="skill" from="MainCanvasLayer/VBoxContainer/GameCanvasLayer/GameMarginContainer/Game" to="MainCanvasLayer/VBoxContainer/SkillsMarginContainer/SkillButtons/HBoxContainer/UndoButton" method="_on_game_skill"]
+[connection signal="remove" from="MainCanvasLayer/VBoxContainer/SkillsMarginContainer/SkillButtons/HBoxContainer/RemoveButton" to="MainCanvasLayer/VBoxContainer/GameCanvasLayer/GameMarginContainer/Game" method="_on_remove_button_remove"]
+[connection signal="switch" from="MainCanvasLayer/VBoxContainer/SkillsMarginContainer/SkillButtons/HBoxContainer/SwitchButton" to="MainCanvasLayer/VBoxContainer/GameCanvasLayer/GameMarginContainer/Game" method="_on_switch_button_switch"]
+[connection signal="restart" from="MainCanvasLayer/VBoxContainer/SkillsMarginContainer/SkillButtons/HBoxContainer/RestartButton" to="." method="_on_restart_button_restart"]
+[connection signal="gui_input" from="PopUpCanvasLayer/OpenChestPopUp" to="." method="_on_open_chest_pop_up_gui_input"]
+[connection signal="restart_no" from="PopUpCanvasLayer/RestartGamePopUp" to="." method="_on_restart_game_pop_up_restart_no"]
+[connection signal="restart_yes" from="PopUpCanvasLayer/RestartGamePopUp" to="." method="_on_restart_game_pop_up_restart_yes"]
+
+[editable path="MainCanvasLayer/VBoxContainer/SkillsMarginContainer/SkillButtons"]

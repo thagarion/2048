@@ -18,21 +18,21 @@ static var random = RandomNumberGenerator.new()
 func _init():
 	var item_remove = Item.new()
 	item_remove.name = "Remove"
-	item_remove.texture = load("res://textures/skills/remove.png")
+	item_remove.texture = load("res://textures/skills/remove-card.png")
 	item_remove.description = "Remove one tile"
 	item_remove.is_skill = true
 	skills.append(item_remove)
 	
 	var item_undo = Item.new()
 	item_undo.name = "Undo"
-	item_undo.texture = load("res://textures/skills/undo.png")
+	item_undo.texture = load("res://textures/skills/undo-card.png")
 	item_undo.description = "Undo last step"
 	item_undo.is_skill = true
 	skills.append(item_undo)
 	
 	var item_switch = Item.new()
 	item_switch.name = "Switch"
-	item_switch.texture = load("res://textures/skills/switch.png")
+	item_switch.texture = load("res://textures/skills/switch-card.png")
 	item_switch.description = "Switch tiles"
 	item_switch.is_skill = true
 	skills.append(item_switch)
