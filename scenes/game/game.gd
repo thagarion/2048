@@ -22,8 +22,8 @@ var swiping_start_position: Vector2
 var swiping_current_position: Vector2
 
 var is_remove = false
-var is_switch = false
-var switch_tile = null
+var is_swap = false
+var swap_tile = null
 
 func _ready():
 	for i in range(field_size):
@@ -83,18 +83,18 @@ func _on_tile_selected(tile: Node):
 					%SkillButtons.update_skill_count("Remove", -1)
 					close_selection()
 					return
-				if is_switch:
-					if switch_tile == null:
-						switch_tile = Vector2(i, j)
+				if is_swap:
+					if swap_tile == null:
+						swap_tile = Vector2(i, j)
 						return
-					elif Vector2(i, j) != switch_tile:
-						var temp = tiles[switch_tile.x][switch_tile.y]
-						tiles[i][j].move(switch_tile.x, switch_tile.y)
-						tiles[switch_tile.x][switch_tile.y] = tiles[i][j]
+					elif Vector2(i, j) != swap_tile:
+						var temp = tiles[swap_tile.x][swap_tile.y]
+						tiles[i][j].move(swap_tile.x, swap_tile.y)
+						tiles[swap_tile.x][swap_tile.y] = tiles[i][j]
 						temp.move(i, j)
 						tiles[i][j] = temp
-						is_switch = false
-						%SkillButtons.update_skill_count("Switch", -1)
+						is_swap = false
+						%SkillButtons.update_skill_count("Swap", -1)
 						close_selection()
 						return
 
@@ -102,6 +102,8 @@ func _on_remove_button_remove():
 	if get_tiles_count() >= 2:
 		moving_disable(true)
 		%SelectTilePopUp.show()
+		%SkillButtons.disable_and_hide()
+		%Score.disable_and_hide()
 		z_index = 1
 		is_remove = true
 		for i in range(field_size):
@@ -109,12 +111,14 @@ func _on_remove_button_remove():
 				if tiles[i][j] != null:
 					tiles[i][j].input_disable(false)
 
-func _on_switch_button_switch():
+func _on_swap_button_swap():
 	if get_tiles_count() >= 2:
 		moving_disable(true)
 		%SelectTilePopUp.show()
+		%SkillButtons.disable_and_hide()
+		%Score.disable_and_hide()
 		z_index = 1
-		is_switch = true
+		is_swap = true
 		for i in range(field_size):
 			for j in range(field_size):
 				if tiles[i][j] != null:
@@ -133,10 +137,12 @@ func set_pack(pack: String):
 
 func close_selection():
 	is_remove = false
-	is_switch = false
-	switch_tile = null
+	is_swap = false
+	swap_tile = null
 	z_index = 0
 	%SelectTilePopUp.hide()
+	%SkillButtons.enable_and_show()
+	%Score.enable_and_show()
 	moving_disable(false)
 	for i in range(field_size):
 		for j in range(field_size):

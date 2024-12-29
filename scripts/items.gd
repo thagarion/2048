@@ -30,12 +30,12 @@ func _init():
 	item_undo.is_skill = true
 	skills.append(item_undo)
 	
-	var item_switch = Item.new()
-	item_switch.name = "Switch"
-	item_switch.texture = load("res://textures/skills/switch-card.png")
-	item_switch.description = "Switch tiles"
-	item_switch.is_skill = true
-	skills.append(item_switch)
+	var item_swap = Item.new()
+	item_swap.name = "Swap"
+	item_swap.texture = load("res://textures/skills/swap-card.png")
+	item_swap.description = "Swap tiles"
+	item_swap.is_skill = true
+	skills.append(item_swap)
 	
 	var texture_packs_dir = DirAccess.open("res://textures/packs")
 	if texture_packs_dir:

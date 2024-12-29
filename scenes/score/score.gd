@@ -33,3 +33,11 @@ func update_value(value):
 	if $ProgressBarContainer/ProgressBar.value >= max_value:
 		if !$ProgressBarContainer/ChestAnimation.is_playing():
 			$ProgressBarContainer/ChestAnimation.play("shake")
+
+func disable_and_hide():
+	$ProgressBarContainer/ProgressBar.z_index = -1
+	$ProgressBarContainer/Container.z_index = -1
+
+func enable_and_show():
+	$ProgressBarContainer/ProgressBar.z_index = 0
+	$ProgressBarContainer/Container.z_index = 0

@@ -1,13 +1,13 @@
 extends MarginContainer
 
 signal restart
-signal switch
+signal swap
 signal undo
 signal remove
 
 @export var Icon: Texture
 @export var ButtonColor: float
-@export_enum("Undo", "Remove", "Switch", "Restart") var Type: String
+@export_enum("Undo", "Remove", "Swap", "Restart") var Type: String
 
 var count = 0
 var color = 0.0
@@ -27,8 +27,8 @@ func _on_button_pressed():
 		match Type:
 			"Undo":
 				undo.emit()
-			"Switch":
-				switch.emit()
+			"Swap":
+				swap.emit()
 			"Remove":
 				remove.emit()
 			"Restart":
@@ -48,3 +48,15 @@ func update_count(val: int):
 	else:
 		button_disable(true)
 		$Panel/VBoxContainer/ButtonMarginContainer/Button.modulate = Color.from_hsv(0, 0, 1, 1)
+
+func disable_and_hide():
+	button_disable(true)
+	$Panel/VBoxContainer/ButtonMarginContainer/Icon.z_index = -1
+	$Panel/VBoxContainer/ButtonMarginContainer/Button.z_index = -1
+	$Panel/VBoxContainer/LabelMarginContainer/Label.z_index = -1
+
+func enable_and_show():
+	button_disable(false)
+	$Panel/VBoxContainer/ButtonMarginContainer/Icon.z_index = 0
+	$Panel/VBoxContainer/ButtonMarginContainer/Button.z_index = 0
+	$Panel/VBoxContainer/LabelMarginContainer/Label.z_index = 0

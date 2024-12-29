@@ -10,6 +10,9 @@ var move_to : Vector2
 var input_disabled = true
 var pack : String
 
+func _ready():
+	z_index = 2
+
 func _process(delta):
 	if is_moving:
 		position = lerp(position, move_to, delta * speed)

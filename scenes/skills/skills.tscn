@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://scenes/skills/skills.gd" id="2_j2g87"]
 [ext_resource type="Texture2D" uid="uid://bmbsgvjy33e1x" path="res://textures/skills/undo.png" id="2_s8bnj"]
 [ext_resource type="Texture2D" uid="uid://cswnnfime5qxt" path="res://textures/skills/remove.png" id="4_j4n1k"]
-[ext_resource type="Texture2D" uid="uid://wyts51nke08t" path="res://textures/skills/switch.png" id="5_fnr5j"]
+[ext_resource type="Texture2D" uid="uid://wyts51nke08t" path="res://textures/skills/swap.png" id="6_2ll4p"]
 
 [node name="SkillButtons" type="VBoxContainer"]
 anchors_preset = 5
@@ -34,11 +34,11 @@ Icon = ExtResource("4_j4n1k")
 ButtonColor = 120.0
 Type = "Remove"
 
-[node name="SwitchButton" parent="HBoxContainer" instance=ExtResource("1_7mfhr")]
+[node name="SwapButton" parent="HBoxContainer" instance=ExtResource("1_7mfhr")]
 layout_mode = 2
-Icon = ExtResource("5_fnr5j")
+Icon = ExtResource("6_2ll4p")
 ButtonColor = 210.0
-Type = "Switch"
+Type = "Swap"
 
 [node name="RestartButton" parent="HBoxContainer" instance=ExtResource("1_7mfhr")]
 layout_mode = 2

@@ -23,6 +23,10 @@ size_flags_horizontal = 3
 expand_mode = 4
 stretch_mode = 6
 
+[node name="SelectTilePopUp" parent="MainCanvasLayer" instance=ExtResource("6_djs5n")]
+unique_name_in_owner = true
+visible = false
+
 [node name="VBoxContainer" type="VBoxContainer" parent="MainCanvasLayer"]
 anchors_preset = 7
 anchor_left = 0.5
@@ -44,36 +48,31 @@ theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 10
 
 [node name="Score" parent="MainCanvasLayer/VBoxContainer/ScoreMarginContainer" instance=ExtResource("2_qer5e")]
+unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Panel" type="Panel" parent="MainCanvasLayer/VBoxContainer"]
-custom_minimum_size = Vector2(520, 540)
+[node name="GameMarginContainer" type="MarginContainer" parent="MainCanvasLayer/VBoxContainer"]
+custom_minimum_size = Vector2(520, 520)
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 0
-
-[node name="GameCanvasLayer" type="CanvasLayer" parent="MainCanvasLayer/VBoxContainer"]
-layer = 2
-
-[node name="GameMarginContainer" type="MarginContainer" parent="MainCanvasLayer/VBoxContainer/GameCanvasLayer"]
-offset_top = 310.0
-offset_right = 540.0
-offset_bottom = 850.0
-size_flags_vertical = 10
+size_flags_vertical = 4
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
+metadata/_edit_use_anchors_ = true
 
-[node name="Panel" type="Panel" parent="MainCanvasLayer/VBoxContainer/GameCanvasLayer/GameMarginContainer"]
+[node name="Panel" type="Panel" parent="MainCanvasLayer/VBoxContainer/GameMarginContainer"]
 layout_mode = 2
 
-[node name="Game" parent="MainCanvasLayer/VBoxContainer/GameCanvasLayer/GameMarginContainer" instance=ExtResource("1_kbx01")]
+[node name="Game" parent="MainCanvasLayer/VBoxContainer/GameMarginContainer" instance=ExtResource("1_kbx01")]
 unique_name_in_owner = true
 visibility_layer = 2
 z_as_relative = false
 custom_minimum_size = Vector2(520, 520)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
 [node name="SkillsMarginContainer" type="MarginContainer" parent="MainCanvasLayer/VBoxContainer"]
 layout_mode = 2
@@ -86,12 +85,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = null
 
-[node name="SelectTilePopUp" parent="MainCanvasLayer" instance=ExtResource("6_djs5n")]
-unique_name_in_owner = true
-visible = false
-
 [node name="PopUpCanvasLayer" type="CanvasLayer" parent="."]
-layer = 3
 
 [node name="OpenChestPopUp" parent="PopUpCanvasLayer" instance=ExtResource("7_6cf5g")]
 unique_name_in_owner = true
@@ -104,10 +98,10 @@ unique_name_in_owner = true
 visible = false
 
 [connection signal="chest_open" from="MainCanvasLayer/VBoxContainer/ScoreMarginContainer/Score" to="." method="_on_score_chest_open"]
-[connection signal="score_signal" from="MainCanvasLayer/VBoxContainer/GameCanvasLayer/GameMarginContainer/Game" to="MainCanvasLayer/VBoxContainer/ScoreMarginContainer/Score" method="_on_game_score_signal"]
-[connection signal="skill" from="MainCanvasLayer/VBoxContainer/GameCanvasLayer/GameMarginContainer/Game" to="MainCanvasLayer/VBoxContainer/SkillsMarginContainer/SkillButtons/HBoxContainer/UndoButton" method="_on_game_skill"]
-[connection signal="remove" from="MainCanvasLayer/VBoxContainer/SkillsMarginContainer/SkillButtons/HBoxContainer/RemoveButton" to="MainCanvasLayer/VBoxContainer/GameCanvasLayer/GameMarginContainer/Game" method="_on_remove_button_remove"]
-[connection signal="switch" from="MainCanvasLayer/VBoxContainer/SkillsMarginContainer/SkillButtons/HBoxContainer/SwitchButton" to="MainCanvasLayer/VBoxContainer/GameCanvasLayer/GameMarginContainer/Game" method="_on_switch_button_switch"]
+[connection signal="score_signal" from="MainCanvasLayer/VBoxContainer/GameMarginContainer/Game" to="MainCanvasLayer/VBoxContainer/ScoreMarginContainer/Score" method="_on_game_score_signal"]
+[connection signal="skill" from="MainCanvasLayer/VBoxContainer/GameMarginContainer/Game" to="MainCanvasLayer/VBoxContainer/SkillsMarginContainer/SkillButtons/HBoxContainer/UndoButton" method="_on_game_skill"]
+[connection signal="remove" from="MainCanvasLayer/VBoxContainer/SkillsMarginContainer/SkillButtons/HBoxContainer/RemoveButton" to="MainCanvasLayer/VBoxContainer/GameMarginContainer/Game" method="_on_remove_button_remove"]
+[connection signal="swap" from="MainCanvasLayer/VBoxContainer/SkillsMarginContainer/SkillButtons/HBoxContainer/SwapButton" to="MainCanvasLayer/VBoxContainer/GameMarginContainer/Game" method="_on_swap_button_swap"]
 [connection signal="restart" from="MainCanvasLayer/VBoxContainer/SkillsMarginContainer/SkillButtons/HBoxContainer/RestartButton" to="." method="_on_restart_button_restart"]
 [connection signal="gui_input" from="PopUpCanvasLayer/OpenChestPopUp" to="." method="_on_open_chest_pop_up_gui_input"]
 [connection signal="restart_no" from="PopUpCanvasLayer/RestartGamePopUp" to="." method="_on_restart_game_pop_up_restart_no"]
