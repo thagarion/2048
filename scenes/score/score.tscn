@@ -206,12 +206,13 @@ layout_mode = 2
 size_flags_vertical = 8
 text = "0
 "
-label_settings = ExtResource("3_1pbcv")
+label_settings = ExtResource("2_x8m3q")
 
 [node name="AddScoreNumber" type="Label" parent="NumbersContainer"]
+visible = false
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
-size_flags_vertical = 8
+size_flags_vertical = 1
 text = "+5"
 label_settings = ExtResource("4_xs4om")
 
