@@ -1,5 +1,7 @@
 extends Container
 
+const Storage = preload("res://scenes/game/action_storage.gd")
+
 signal score_signal(value)
 signal skill(name: String)
 
@@ -24,6 +26,8 @@ var swiping_current_position: Vector2
 var is_remove = false
 var is_swap = false
 var swap_tile = null
+
+var actions = ActionStorage.new()
 
 func _ready():
 	for i in range(field_size):
@@ -171,8 +175,9 @@ func create_tile(i: int, j: int):
 	tile.set_pack(pack_name)
 	tiles[i][j] = tile
 	$Tiles.add_child(tile)
-	tile.position = Vector2(i*tile.size.x, j*tile.size.y)
+	tile.set_location(i, j)
 	tile.connect("tile_selected", _on_tile_selected)
+	actions.add(Vector2(i, j))
 
 func start_game():
 	$GameOver.hide()
@@ -235,67 +240,100 @@ func move(direction: Move):
 						moved = true
 	if moved:
 		should_create_tile = true
+	actions.add_step()
 
 func move_up(x : int, y : int) -> bool:
 	var result = false
+	var from = Vector2(x, y)
+	var to: Vector2
 	while y > 0 and tiles[x][y - 1] == null:
 		tiles[x][y].move(x, y - 1)
+		to = Vector2(x, y - 1)
 		tiles[x][y - 1] = tiles[x][y]
 		tiles[x][y] = null
 		y -= 1
 		result = true
+	if result:
+		actions.move(from, to)
 	if y > 0 and tiles[x][y - 1].get_value() == tiles[x][y].get_value():
 		tiles[x][y].move(x, y - 1)
+		actions.move(Vector2(x, y), Vector2(x, y - 1))
 		tiles[x][y].queue_free()
+		actions.remove(Vector2(x, y))
 		tiles[x][y - 1].level_up()
+		actions.change(Vector2(x, y - 1), tiles[x][y - 1].get_value())
 		tiles[x][y] = null
 		result = true
 	return result
 
 func move_down(x : int, y : int) -> bool:
 	var result = false
+	var from = Vector2(x, y)
+	var to: Vector2
 	while y < field_size - 1 and tiles[x][y + 1] == null:
 		tiles[x][y].move(x, y + 1)
+		to = Vector2(x, y + 1)
 		tiles[x][y + 1] = tiles[x][y]
 		tiles[x][y] = null
 		y += 1
 		result = true
+	if result:
+		actions.move(from, to)
 	if y >= 0 and y < field_size - 1 and tiles[x][y + 1].get_value() == tiles[x][y].get_value():
 		tiles[x][y].move(x, y + 1)
+		actions.move(Vector2(x, y), Vector2(x, y + 1))
 		tiles[x][y].queue_free()
+		actions.remove(Vector2(x, y))
 		tiles[x][y + 1].level_up()
+		actions.change(Vector2(x, y + 1), tiles[x][y + 1].get_value())
 		tiles[x][y] = null
 		result = true
 	return result
 
 func move_right(x : int, y : int) -> bool:
 	var result = false
+	var from = Vector2(x, y)
+	var to: Vector2
 	while x < field_size - 1 and tiles[x + 1][y] == null:
 		tiles[x][y].move(x + 1, y)
+		to = Vector2(x + 1, y)
 		tiles[x + 1][y] = tiles[x][y]
 		tiles[x][y] = null
 		x += 1
 		result = true
+	if result:
+		actions.move(from, to)
 	if x >= 0 and x < field_size - 1 and tiles[x + 1][y].get_value() == tiles[x][y].get_value():
 		tiles[x][y].move(x + 1, y)
+		actions.move(Vector2(x, y), Vector2(x + 1, y))
 		tiles[x][y].queue_free()
+		actions.remove(Vector2(x, y))
 		tiles[x + 1][y].level_up()
+		actions.change(Vector2(x + 1, y), tiles[x + 1][y].get_value())
 		tiles[x][y] = null
 		result = true
 	return result
 
 func move_left(x : int, y : int) -> bool:
 	var result = false
+	var from = Vector2(x, y)
+	var to: Vector2
 	while x > 0 and tiles[x - 1][y] == null:
 		tiles[x][y].move(x - 1, y)
+		to = Vector2(x - 1, y)
 		tiles[x - 1][y] = tiles[x][y]
 		tiles[x][y] = null
 		x -= 1
 		result = true
+	if result:
+		actions.move(from, to)
 	if x > 0 and tiles[x - 1][y].get_value() == tiles[x][y].get_value():
 		tiles[x][y].move(x - 1, y)
+		actions.move(Vector2(x, y), Vector2(x - 1, y))
 		tiles[x][y].queue_free()
+		actions.remove(Vector2(x, y))
 		tiles[x - 1][y].level_up()
+		actions.change(Vector2(x - 1, y), tiles[x - 1][y].get_value())
 		tiles[x][y] = null
 		result = true
 	return result

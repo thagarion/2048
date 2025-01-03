@@ -30,6 +30,9 @@ func set_pack(pack_name: String):
 	$Texture.texture = Items.get_pack(pack)[value].texture
 	$AnimationPlayer.play("add_tile")
 
+func set_location(x: int, y: int):
+	position = Vector2(x * size.x, y * size.y)
+
 func move(x: int, y: int):
 	move_to = Vector2(x * size.x, y * size.y)
 	is_moving = true

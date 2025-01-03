@@ -2,7 +2,7 @@ extends Node
 
 class_name ActionStorage
 
-enum ActionType {Add = 0, Remove = 1, Change = 2} 
+enum ActionType {Add = 0, Remove = 1, Change = 2, Move = 4} 
 
 class Action:
 	var type: ActionType
@@ -13,8 +13,11 @@ class Action:
 
 var steps = []
 var actions = []
-var max_size: int
+var max_size = 100
 var current_step = 0
+
+func _init():
+	steps.append([])
 
 func set_size(val: int):
 	max_size = val + 1
@@ -22,11 +25,11 @@ func set_size(val: int):
 		steps.pop_front()
 
 func add_step():
-	steps.append([])
 	if steps.size() > max_size:
 		steps.pop_front()
 	else:
 		current_step += 1
+		steps.append([])
 
 func add(location: Vector2):
 	var action = Action.new()
@@ -40,8 +43,17 @@ func remove(location: Vector2):
 	action.from = location
 	steps[current_step].append(action)
 
-func merge(location: Vector2):
+func change(location: Vector2, value: int):
 	var action = Action.new()
-	action.type = ActionType.Remove
+	action.type = ActionType.Change
 	action.from = location
+	action.new_value = value
+	action.old_value = value - 1
+	steps[current_step].append(action)
+
+func move(location1: Vector2, location2: Vector2):
+	var action = Action.new()
+	action.type = ActionType.Move
+	action.from = location1
+	action.to = location2
 	steps[current_step].append(action)
