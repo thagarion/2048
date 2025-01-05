@@ -165,19 +165,20 @@ func create_random_tile():
 	if available.size() > 0:
 		var index = randi() % available.size()
 		create_tile(available[index].x, available[index].y)
+		actions.add(Vector2(available[index].x, available[index].y))
 	if available.size() == 1 && is_game_over():
 		$GameOver.show()
 		moving_disable(true)
 	score_signal.emit(score)
 
-func create_tile(i: int, j: int):
+func create_tile(i: int, j: int, value: int = 0):
 	var tile = Tile.instantiate()
 	tile.set_pack(pack_name)
 	tiles[i][j] = tile
 	$Tiles.add_child(tile)
 	tile.set_location(i, j)
+	tile.set_value(value)
 	tile.connect("tile_selected", _on_tile_selected)
-	actions.add(Vector2(i, j))
 
 func start_game():
 	$GameOver.hide()
@@ -192,6 +193,7 @@ func start_game():
 		var j = randi() % field_size
 		if tiles[i][j] == null:
 			create_tile(i, j)
+			actions.add(Vector2(i, j))
 			tiles_count += 1
 	moving_disable(false)
 	score_signal.emit(0)
@@ -212,6 +214,7 @@ func is_game_over() -> bool:
 	return true
 
 func move(direction: Move):
+	actions.add_step()
 	wait_moving = true
 	var moved = false
 	if direction == Move.Up:
@@ -240,7 +243,6 @@ func move(direction: Move):
 						moved = true
 	if moved:
 		should_create_tile = true
-	actions.add_step()
 
 func move_up(x : int, y : int) -> bool:
 	var result = false
@@ -258,8 +260,8 @@ func move_up(x : int, y : int) -> bool:
 	if y > 0 and tiles[x][y - 1].get_value() == tiles[x][y].get_value():
 		tiles[x][y].move(x, y - 1)
 		actions.move(Vector2(x, y), Vector2(x, y - 1))
+		actions.remove(Vector2(x, y), tiles[x][y].get_value())
 		tiles[x][y].queue_free()
-		actions.remove(Vector2(x, y))
 		tiles[x][y - 1].level_up()
 		actions.change(Vector2(x, y - 1), tiles[x][y - 1].get_value())
 		tiles[x][y] = null
@@ -282,8 +284,8 @@ func move_down(x : int, y : int) -> bool:
 	if y >= 0 and y < field_size - 1 and tiles[x][y + 1].get_value() == tiles[x][y].get_value():
 		tiles[x][y].move(x, y + 1)
 		actions.move(Vector2(x, y), Vector2(x, y + 1))
+		actions.remove(Vector2(x, y), tiles[x][y].get_value())
 		tiles[x][y].queue_free()
-		actions.remove(Vector2(x, y))
 		tiles[x][y + 1].level_up()
 		actions.change(Vector2(x, y + 1), tiles[x][y + 1].get_value())
 		tiles[x][y] = null
@@ -306,8 +308,8 @@ func move_right(x : int, y : int) -> bool:
 	if x >= 0 and x < field_size - 1 and tiles[x + 1][y].get_value() == tiles[x][y].get_value():
 		tiles[x][y].move(x + 1, y)
 		actions.move(Vector2(x, y), Vector2(x + 1, y))
+		actions.remove(Vector2(x, y), tiles[x][y].get_value())
 		tiles[x][y].queue_free()
-		actions.remove(Vector2(x, y))
 		tiles[x + 1][y].level_up()
 		actions.change(Vector2(x + 1, y), tiles[x + 1][y].get_value())
 		tiles[x][y] = null
@@ -330,8 +332,8 @@ func move_left(x : int, y : int) -> bool:
 	if x > 0 and tiles[x - 1][y].get_value() == tiles[x][y].get_value():
 		tiles[x][y].move(x - 1, y)
 		actions.move(Vector2(x, y), Vector2(x - 1, y))
+		actions.remove(Vector2(x, y), tiles[x][y].get_value())
 		tiles[x][y].queue_free()
-		actions.remove(Vector2(x, y))
 		tiles[x - 1][y].level_up()
 		actions.change(Vector2(x - 1, y), tiles[x - 1][y].get_value())
 		tiles[x][y] = null
@@ -351,3 +353,24 @@ func moving_disable(val: bool):
 		$Tiles.mouse_filter = MOUSE_FILTER_IGNORE
 	else:
 		$Tiles.mouse_filter = MOUSE_FILTER_PASS
+
+
+func _on_undo_button_undo():
+	if actions.get_size() > 0:
+		for action in actions.get_last():
+			match action.type:
+				ActionStorage.ActionType.Add:
+					print("Remove from ", action.to.x, action.to.y)
+					tiles[action.to.x][action.to.y].queue_free()
+					tiles[action.to.x][action.to.y] = null
+				ActionStorage.ActionType.Remove:
+					print("Add to ", action.from.x, action.from.y, " val=", action.old_value)
+					create_tile(action.from.x, action.from.y, action.old_value)
+				ActionStorage.ActionType.Change:
+					print("Change to ", action.from.x, action.from.y, " val=", action.old_value)
+					tiles[action.from.x][action.from.y].set_value(action.old_value)
+				ActionStorage.ActionType.Move:
+					print("Move from ", action.to.x, action.to.y, " to ", action.from.x, action.from.y)
+					tiles[action.to.x][action.to.y].move(action.from.x, action.from.y)
+					tiles[action.from.x][action.from.y] = tiles[action.to.x][action.to.y]
+					tiles[action.to.x][action.to.y] = null

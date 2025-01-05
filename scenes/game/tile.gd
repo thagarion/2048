@@ -54,6 +54,10 @@ func level_up():
 	$AnimationPlayer.play("add_tile")
 	$Texture.texture = Items.get_pack(pack)[value].texture
 
+func set_value(val: int):
+	value = val
+	$Texture.texture = Items.get_pack(pack)[value].texture
+
 func get_value() -> int:
 	return value
 

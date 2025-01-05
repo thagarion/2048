@@ -100,6 +100,7 @@ visible = false
 [connection signal="chest_open" from="MainCanvasLayer/VBoxContainer/ScoreMarginContainer/Score" to="." method="_on_score_chest_open"]
 [connection signal="score_signal" from="MainCanvasLayer/VBoxContainer/GameMarginContainer/Game" to="MainCanvasLayer/VBoxContainer/ScoreMarginContainer/Score" method="_on_game_score_signal"]
 [connection signal="skill" from="MainCanvasLayer/VBoxContainer/GameMarginContainer/Game" to="MainCanvasLayer/VBoxContainer/SkillsMarginContainer/SkillButtons/HBoxContainer/UndoButton" method="_on_game_skill"]
+[connection signal="undo" from="MainCanvasLayer/VBoxContainer/SkillsMarginContainer/SkillButtons/HBoxContainer/UndoButton" to="MainCanvasLayer/VBoxContainer/GameMarginContainer/Game" method="_on_undo_button_undo"]
 [connection signal="remove" from="MainCanvasLayer/VBoxContainer/SkillsMarginContainer/SkillButtons/HBoxContainer/RemoveButton" to="MainCanvasLayer/VBoxContainer/GameMarginContainer/Game" method="_on_remove_button_remove"]
 [connection signal="swap" from="MainCanvasLayer/VBoxContainer/SkillsMarginContainer/SkillButtons/HBoxContainer/SwapButton" to="MainCanvasLayer/VBoxContainer/GameMarginContainer/Game" method="_on_swap_button_swap"]
 [connection signal="restart" from="MainCanvasLayer/VBoxContainer/SkillsMarginContainer/SkillButtons/HBoxContainer/RestartButton" to="." method="_on_restart_button_restart"]

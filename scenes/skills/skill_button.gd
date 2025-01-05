@@ -37,6 +37,9 @@ func _on_button_pressed():
 func button_disable(value: bool):
 	$Panel/VBoxContainer/ButtonMarginContainer/Button.disabled = value
 
+func get_count() -> int:
+	return count
+
 func update_count(val: int):
 	if Type == "Restart":
 		return

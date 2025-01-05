@@ -16,3 +16,6 @@ func disable_and_hide():
 func enable_and_show():
 	for node in $HBoxContainer.get_children():
 		node.enable_and_show()
+
+func get_undo_count() -> int:
+	return $HBoxContainer/UndoButton.get_count()
