@@ -214,6 +214,7 @@ func is_game_over() -> bool:
 	return true
 
 func move(direction: Move):
+	actions.set_size(%SkillButtons.get_undo_count())
 	actions.add_step()
 	wait_moving = true
 	var moved = false
@@ -259,7 +260,6 @@ func move_up(x : int, y : int) -> bool:
 		actions.move(from, to)
 	if y > 0 and tiles[x][y - 1].get_value() == tiles[x][y].get_value():
 		tiles[x][y].move(x, y - 1)
-		actions.move(Vector2(x, y), Vector2(x, y - 1))
 		actions.remove(Vector2(x, y), tiles[x][y].get_value())
 		tiles[x][y].queue_free()
 		tiles[x][y - 1].level_up()
@@ -283,7 +283,6 @@ func move_down(x : int, y : int) -> bool:
 		actions.move(from, to)
 	if y >= 0 and y < field_size - 1 and tiles[x][y + 1].get_value() == tiles[x][y].get_value():
 		tiles[x][y].move(x, y + 1)
-		actions.move(Vector2(x, y), Vector2(x, y + 1))
 		actions.remove(Vector2(x, y), tiles[x][y].get_value())
 		tiles[x][y].queue_free()
 		tiles[x][y + 1].level_up()
@@ -307,7 +306,6 @@ func move_right(x : int, y : int) -> bool:
 		actions.move(from, to)
 	if x >= 0 and x < field_size - 1 and tiles[x + 1][y].get_value() == tiles[x][y].get_value():
 		tiles[x][y].move(x + 1, y)
-		actions.move(Vector2(x, y), Vector2(x + 1, y))
 		actions.remove(Vector2(x, y), tiles[x][y].get_value())
 		tiles[x][y].queue_free()
 		tiles[x + 1][y].level_up()
@@ -331,7 +329,6 @@ func move_left(x : int, y : int) -> bool:
 		actions.move(from, to)
 	if x > 0 and tiles[x - 1][y].get_value() == tiles[x][y].get_value():
 		tiles[x][y].move(x - 1, y)
-		actions.move(Vector2(x, y), Vector2(x - 1, y))
 		actions.remove(Vector2(x, y), tiles[x][y].get_value())
 		tiles[x][y].queue_free()
 		tiles[x - 1][y].level_up()
@@ -357,7 +354,9 @@ func moving_disable(val: bool):
 
 func _on_undo_button_undo():
 	if actions.get_size() > 0:
-		for action in actions.get_last():
+		var action_list = actions.get_last()
+		action_list.reverse()
+		for action in action_list:
 			match action.type:
 				ActionStorage.ActionType.Add:
 					print("Remove from ", action.to.x, action.to.y)
@@ -374,3 +373,4 @@ func _on_undo_button_undo():
 					tiles[action.to.x][action.to.y].move(action.from.x, action.from.y)
 					tiles[action.from.x][action.from.y] = tiles[action.to.x][action.to.y]
 					tiles[action.to.x][action.to.y] = null
+		%SkillButtons.update_skill_count("Undo", -1)

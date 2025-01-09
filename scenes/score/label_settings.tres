@@ -1,10 +1,10 @@
 [gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://dvhrfra0dkik3"]
 
-[ext_resource type="FontFile" uid="uid://brfgvos0vqx5v" path="res://fonts/Neocyr.ttf" id="1_7c6s4"]
+[ext_resource type="FontFile" uid="uid://brfgvos0vqx5v" path="res://fonts/Neocyr.ttf" id="1_c3g8h"]
 
 [resource]
-font = ExtResource("1_7c6s4")
-font_size = 40
+font = ExtResource("1_c3g8h")
+font_size = 48
 outline_size = 5
 outline_color = Color(0, 0, 0, 1)
 shadow_size = 5

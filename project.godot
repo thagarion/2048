@@ -26,8 +26,9 @@ ItemsStatic="*res://scripts/items.gd"
 
 window/size/viewport_width=540
 window/size/viewport_height=960
-window/stretch/mode="viewport"
+window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+window/per_pixel_transparency/allowed=true
 window/handheld/orientation=1
 
 [filesystem]

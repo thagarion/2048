@@ -13,7 +13,7 @@ class Action:
 
 var steps = []
 var actions = []
-var max_size = 100
+var max_size
 var current_step = 0
 
 func _init():
@@ -31,8 +31,9 @@ func get_last() -> Array:
 	return steps.pop_back()
 
 func add_step():
-	if steps.size() > max_size:
+	if steps.size() >= max_size:
 		steps.pop_front()
+		steps.append([])
 	else:
 		current_step += 1
 		steps.append([])
@@ -56,7 +57,7 @@ func change(location: Vector2, value: int):
 	action.from = location
 	action.new_value = value
 	action.old_value = value - 1
-	steps[current_step].append(action)
+	steps[current_step].append(action)	
 
 func move(location1: Vector2, location2: Vector2):
 	var action = Action.new()
